@@ -1,5 +1,5 @@
 # OpenFOAM
-Modifications to OpenFOAM v7, improving Lagrangian multiphase functionality for use in the study of automotive surface contamination at Loughborough University
+Modifications to OpenFOAM v7 providing improvements to Lagrangian multiphase functionality. Used to support research into automotive surface contamination at Loughborough University
 
 ### Existing OpenFOAM Files
 Any minor additions or alterations made to existing OpenFOAM files are denoted by the inclusion of *CJC* comments
