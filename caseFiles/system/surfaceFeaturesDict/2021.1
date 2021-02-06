@@ -1,0 +1,52 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+	version		2.0;
+	format		ascii;
+	class		dictionary;
+	object		surfaceFeatureExtractDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Revision 2021.1
+// Changes from previous revision: N/A
+
+surfaces
+(
+	"Windsor_Body_Square.stl"
+	// "Windsor_Body_SideTapers_24.stl"
+	"Windsor_Axles_sHM.stl"
+	"Windsor_Wheels.stl"
+);
+
+includedAngle		150;	// 0: Finds no edges
+							// 180: Finds all edges
+
+geometricTestOnly	no;		// Include region boundaries as features
+
+subsetFeatures
+{
+	// plane				(normal)(basePoint);	// Only intersecting edges
+	// insideBox			(min)(max);				// Only interior edges
+	// outsideBox			(min)(max);				// Only exterior edges
+
+	nonManifoldEdges    yes;	// Include non-Manifold edges
+	openEdges           yes;	// Include open edges (edges with 1 connected face)
+}
+
+trimFeatures
+{
+	minElem				0;		// Remove if fewer edges than specified
+	minLen          	0;		// Remove if shorter than specified
+}
+
+writeObj			yes;
+verboseObj			no;
+
+// ************************************************************************* //

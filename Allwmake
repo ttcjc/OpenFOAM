@@ -1,0 +1,9 @@
+#!/bin/bash
+clear
+wclean all ..
+rm -rf platforms
+wmake all src/lagrangian/basic
+wmake all src/lagrangian/intermediate
+wmake all src/lagrangian/turbulence
+wmake all src/functionObjects/field
+wmake all applications/solvers/incompressible
