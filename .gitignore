@@ -1,4 +1,6 @@
-# Ignore directories
+# Ignore Directories
 platforms/
 results/
 run/
+
+# Ignore Files
