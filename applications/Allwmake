@@ -1,0 +1,5 @@
+#!/bin/bash
+clear
+wclean all
+cd solvers/incompressible && wmake all
+cd ../..

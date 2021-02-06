@@ -1,0 +1,4 @@
+DESmodelRegions/DESmodelRegions.C
+LESresolution/LESresolution.C
+
+LIB = $(FOAM_USER_LIBBIN)/libfieldFunctionObjectsCJC
