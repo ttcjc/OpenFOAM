@@ -51,15 +51,17 @@ Sub-models include:
 
 Brings DESModelRegions functionality from OpenFOAM v2.3 to OpenFOAM v7 based on [wyldckat's](https://github.com/wyldckat/DESModelRegions) own implementation for OpenFOAM v5 and OpenFOAM v6
 
-Outputs an indicator of RAS and LES regions within a DES simulation
-* '0' indicates RAS
-* '1' indicates LES
+Outputs an indicator of RAS and LES regions within a DES simulation:
+- '0' indicates RAS
+- '1' indicates LES
 
 ##### LESresolution
 
 Outputs the ratio of resolved turbulent kinetic energy to total turbulent kinetic energy within LES or DES simulations
-* Requires fieldAverage function to obtain UPrime2Mean (Resolved Reynolds Stress Tensor)
-* Requires turbulenceFields function to obtain R (Subgrid Reynolds Stress Tensor)
+
+Dependencies:
+- fieldAverage function to obtain UPrime2Mean (Resolved Reynolds Stress Tensor)
+- turbulenceFields function to obtain R (Subgrid Reynolds Stress Tensor)
 
 ### lagrangian
 

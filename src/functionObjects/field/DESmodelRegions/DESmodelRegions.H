@@ -13,7 +13,7 @@ Description
 	Brings DESModelRegions functionality from OpenFOAM v2.3 to OpenFOAM v7
 	based on wyldckat's own implementation for OpenFOAM v5 and OpenFOAM v6
 
-	Outputs an indicator of RAS and LES regions within a DES simulation
+	Outputs an indicator of RAS and LES regions within a DES simulation:
 	- '0' indicates RAS
 	- '1' indicates LES
 
