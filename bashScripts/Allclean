@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 ## Call Cleaning Functions
 . $WM_PROJECT_DIR/bin/tools/CleanFunctions
 
@@ -7,7 +9,7 @@
 cleanCase
 rm -rf constant/extendedFeatureEdgeMesh > /dev/null 2>&1
 rm -rf constant/triSurface/*.eMesh > /dev/null 2>&1
-rm -rf extractionData/*_extractionData > /dev/null 2>&1
 rm -rf *.err > /dev/null 2>&1
 rm -rf *.out > /dev/null 2>&1
 rm -rf 0/cell* > /dev/null 2>&1
+sed -i 9q extractionData/extractionData

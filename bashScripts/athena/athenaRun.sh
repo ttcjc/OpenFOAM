@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#SBATCH --time=12:00:00
-#SBATCH --job-name=mesh
-#SBATCH --output=mesh.out
-#SBATCH --error=mesh.err
+#SBATCH --time=96:00:00
+#SBATCH --job-name=run
+#SBATCH --output=run.out
+#SBATCH --error=run.err
 #SBATCH --partition=compute
-#SBATCH --nodes=10
+#SBATCH --nodes=20
 #SBATCH --ntasks-per-node=28
 #SBATCH --account=a01-Garmory2020a
 #SBATCH --mail-type=ALL
@@ -18,7 +18,7 @@ module load openfoam/7.0/intel-2018.02
 source $FOAM_BASH
 
 ## Prepare Scripts
-chmod +x Allmesh
+chmod +x Allrun
 
 ## Run
-./Allmesh
+./Allrun

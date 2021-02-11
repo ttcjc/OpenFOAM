@@ -3,7 +3,7 @@
 echo "${PWD##*/} Reconstruction Initiated"
 
 ## Reconstruction
-reconstructPar > log.reconstructPar
+reconstructPar > log.reconstructParRun
 
 ## Clean-up
 rm -rf processor* > /dev/null 2>&1

@@ -11,12 +11,12 @@ Application
 
 Description
     Transient solver for incompressible, particle-laden, turbulent flow,
-	using the PISO algorithm.
+	using the PISO algorithm
 
     Sub-models include:
-    - Generic turbulence modelling, i.e. laminar, RAS or LES
+    - Turbulence modelling, i.e. laminar, RAS or LES
     - Run-time selectable MRF and finite volume options, e.g. explicit porosity
-	- Optional Lagrangian particle clouds
+	- Optional modelling of Lagrangian particle clouds
 
 \*---------------------------------------------------------------------------*/
 

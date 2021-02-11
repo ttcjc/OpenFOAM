@@ -23,9 +23,25 @@ This is a multi-line modification #2
 
 ### solvers
 
-##### pimpleFoamL & pisoFoamL
+##### pimpleFoamL
 
-Modified verions of pimpleFoam and pisoFoam with support for Lagrangian particle clouds
+Transient solver for incompressible, particle-laden, turbulent flow
+using the merged PISO-SIMPLE algorithm
+
+Sub-models include:
+- Turbulence modelling, i.e. laminar, RAS or LES
+- Optional mesh motion and mesh topology changes
+- Optional modelling of Lagrangian particle clouds
+
+##### pisoFoamL
+
+Transient solver for incompressible, particle-laden, turbulent flow,
+using the PISO algorithm
+
+Sub-models include:
+- Turbulence modelling, i.e. laminar, RAS or LES
+- Run-time selectable MRF and finite volume options, e.g. explicit porosity
+- Optional modelling of Lagrangian particle clouds
 
 # src
 

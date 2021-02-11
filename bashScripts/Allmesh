@@ -9,10 +9,10 @@ checkMesh -writeSets vtk > log.checkMeshBlock
 ## snappyHexMesh
 surfaceFeatures > log.surfaceFeatures
 decomposePar > log.decomposeParMesh
-mpirun -np 6 snappyHexMesh -parallel > log.meshSnappy
-# mpirun -np 280 snappyHexMesh -parallel > log.meshSnappy
-mpirun -np 6 checkMesh -parallel -latestTime -writeSets vtk > log.checkMeshSnappy
-# mpirun -np 280 checkMesh -parallel -latestTime -writeSets vtk > log.checkMeshSnappy
+# mpirun -np 6 snappyHexMesh -parallel > log.meshSnappy
+mpirun -np 560 snappyHexMesh -parallel > log.meshSnappy
+# mpirun -np 6 checkMesh -parallel -latestTime -writeSets vtk > log.checkMeshSnappy
+mpirun -np 560 checkMesh -parallel -latestTime -writeSets vtk > log.checkMeshSnappy
 reconstructParMesh -latestTime > log.reconstructParMesh
 
 ## Clean-up
