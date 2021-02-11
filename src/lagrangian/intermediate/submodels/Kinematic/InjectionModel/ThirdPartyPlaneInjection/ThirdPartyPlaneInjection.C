@@ -129,24 +129,6 @@ Foam::scalar Foam::ThirdPartyPlaneInjection<CloudType>::timeEnd() const
 }
 
 
-// template<class CloudType>
-// Foam::label Foam::ThirdPartyPlaneInjection<CloudType>::parcelsToInject
-// (
-//     const scalar time0,
-//     const scalar time1
-// )
-// {
-//     if ((time0 >= 0.0) && (time0 < duration_))
-//     {
-//         return floor(injectorCells_.size()*(time1 - time0)*parcelsPerSecond_);
-//     }
-//     else
-//     {
-//         return 0;
-//     }
-// }
-
-
 // CJC {
 template<class CloudType>
 Foam::label Foam::ThirdPartyPlaneInjection<CloudType>::parcelsToInject
@@ -167,9 +149,6 @@ Foam::label Foam::ThirdPartyPlaneInjection<CloudType>::parcelsToInject
 			break;
 		}
 	}
-
-	// Info << " " << endl;
-	Info << nl << "parcelsToInject = " << parcelsToInject << endl;
 
 	return parcelsToInject;
 }
