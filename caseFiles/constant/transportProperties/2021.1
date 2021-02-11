@@ -16,14 +16,16 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // Revision 2021.1
-// Changes from previous revision: N/A
+// Changelog: N/A
+// Notes: Based on Max Varney's experimental values
+//		  https://doi.org/10.17028/rd.lboro.13161284.v1
 
 transportModel  Newtonian;
 
-nu              [0 2 -1 0 0 0 0] 1.5112e-05;	// Kinematic Viscosity
+nu              [0 2 -1 0 0 0 0] 1.382e-5;	// Kinematic Viscosity
 				// kg m s K mol A cd
 
-rhoInf			rhoInf [1 -3 0 0 0 0 0] 1.2047;	// Fluid Density
+rhoInf			rhoInf [1 -3 0 0 0 0 0] 1.269;	// Fluid Density
 				// kg m s K mol A cd
 
 // ************************************************************************* //

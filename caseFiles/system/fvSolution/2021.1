@@ -16,15 +16,16 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // Revision 2021.1
-// Changes from previous revision: N/A
+// Changelog: N/A
+// Notes: N/A
 
 solvers
 {
-	"(U.*|nuTilda.*)"
+	"(Phi.*|U.*|nuTilda.*)"
 	{
 		solver					GAMG;
 		smoother				GaussSeidel;
-		tolerance				1e-7;
+		tolerance				1e-8;
 		relTol					0;
 		minIter					1;
 
@@ -43,7 +44,7 @@ solvers
 	{
 		solver					GAMG;
 		smoother				GaussSeidel;
-		tolerance				1e-4;
+		tolerance				1e-5;
 		relTol					0;
 		minIter					1;
 
@@ -80,6 +81,17 @@ solvers
 
 relaxationFactors
 {
+}
+
+cache
+{
+	grad(U);
+	grad(nuTilda);
+}
+
+potentialFlow
+{
+	nNonOrthogonalCorrectors  4;
 }
 
 PISO

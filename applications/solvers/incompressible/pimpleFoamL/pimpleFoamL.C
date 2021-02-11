@@ -14,9 +14,9 @@ Description
 	using the merged PISO-SIMPLE algorithm
 
 	Sub-models include:
-	- Generic turbulence modelling, i.e. laminar, RAS or LES
+	- Turbulence modelling, i.e. laminar, RAS or LES
 	- Optional mesh motion and mesh topology changes
-	- Optional Lagrangian particle clouds
+	- Optional modelling of Lagrangian particle clouds
 
 \*---------------------------------------------------------------------------*/
 

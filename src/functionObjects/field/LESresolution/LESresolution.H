@@ -12,10 +12,10 @@ Class
 Description
 	Outputs the ratio of resolved turbulent kinetic energy to total
 	turbulent kinetic energy within LES or DES simulations
-	- Requires fieldAverage function to obtain UPrime2Mean
-	  (Resolved Reynolds Stress Tensor)
-	- Requires turbulenceFields function to obtain R
-	  (Subgrid Reynolds Stress Tensor)
+
+	Dependencies:
+	- fieldAverage function to obtain UPrime2Mean (Resolved Reynolds Stress Tensor)
+	- turbulenceFields function to obtain R (Subgrid Reynolds Stress Tensor)
 
 See also
 	Foam::functionObjects::fieldExpression
