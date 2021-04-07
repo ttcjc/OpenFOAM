@@ -45,7 +45,7 @@ Foam::functionObjects::DESmodelRegions::DESmodelRegions
 :
     fvMeshFunctionObject(name, runTime, dict)
 {
-	read(dict);
+    read(dict);
 }
 
 
@@ -59,72 +59,72 @@ Foam::functionObjects::DESmodelRegions::~DESmodelRegions()
 
 const Foam::word& Foam::functionObjects::DESmodelRegions::modelName()
 {
-	return Foam::turbulenceModel::propertiesName;
+    return Foam::turbulenceModel::propertiesName;
 }
 
 
 bool Foam::functionObjects::DESmodelRegions::execute()
 {
-	if
-	(
-		obr_.foundObject<incompressible::turbulenceModel>(modelName())
-	)
-	{
-		const incompressible::turbulenceModel& turbModel =
-		obr_.lookupObject<incompressible::turbulenceModel>(modelName());
+    if
+    (
+        obr_.foundObject<incompressible::turbulenceModel>(modelName())
+    )
+    {
+        const incompressible::turbulenceModel& turbModel =
+        obr_.lookupObject<incompressible::turbulenceModel>(modelName());
 
-		typedef LESModels::SpalartAllmarasDES<incompressible::turbulenceModel> icoDESmodel;
+        typedef LESModels::SpalartAllmarasDES<incompressible::turbulenceModel> icoDESmodel;
 
-		if
-		(
-			isA<icoDESmodel>(turbModel)
-		)
-		{
-			const icoDESmodel& DES = dynamic_cast<const icoDESmodel&>(turbModel);
+        if
+        (
+            isA<icoDESmodel>(turbModel)
+        )
+        {
+            const icoDESmodel& DES = dynamic_cast<const icoDESmodel&>(turbModel);
 
-			tmp<volScalarField> tDESfield(DES.LESRegion());
-			volScalarField &DESmodelRegions = tDESfield.ref();
+            tmp<volScalarField> tDESfield(DES.LESRegion());
+            volScalarField &DESmodelRegions = tDESfield.ref();
 
-			word result("DESmodelRegions");
+            word result("DESmodelRegions");
 
-			return store
-			(
-				result,
-				DESmodelRegions / dimensionedScalar(dimless, 1)
-			);
-		}
-	}
+            return store
+            (
+                result,
+                DESmodelRegions / dimensionedScalar(dimless, 1)
+            );
+        }
+    }
 
-	else if
-	(
-		obr_.foundObject<compressible::turbulenceModel>(modelName())
-	)
-	{
-		FatalErrorInFunction
-			<< "Support for Compressible Solvers Not Yet Implemented"
-			<< exit(FatalError);
-	}
+    else if
+    (
+        obr_.foundObject<compressible::turbulenceModel>(modelName())
+    )
+    {
+        FatalErrorInFunction
+            << "Support for Compressible Solvers Not Yet Implemented"
+            << exit(FatalError);
+    }
 
-	else
-	{
-		FatalErrorInFunction
-			<< "Invalid Turbulence Model"
-			<< exit(FatalError);
-	}
+    else
+    {
+        FatalErrorInFunction
+            << "Invalid Turbulence Model"
+            << exit(FatalError);
+    }
 
-	return true;
+    return true;
 }
 
 
 bool Foam::functionObjects::DESmodelRegions::write()
 {
-	Log << type() << " " << name() << " Output:" << nl
-		<< "	Writing DES Field" << nl << endl;
+    Log << type() << " " << name() << " Output:" << nl
+        << "    Writing DES Field" << nl << endl;
 
-	const volScalarField& DESmodelRegions = obr_.lookupObject<volScalarField>("DESmodelRegions");
-	DESmodelRegions.write();
+    const volScalarField& DESmodelRegions = obr_.lookupObject<volScalarField>("DESmodelRegions");
+    DESmodelRegions.write();
 
-	return true;
+    return true;
 }
 
 // ************************************************************************* //

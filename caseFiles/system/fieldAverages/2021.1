@@ -12,56 +12,56 @@
 
 fieldAverages
 {
-    type			fieldAverage;
-    libs			("libfieldFunctionObjects.so");
-	executeControl	timeStep;
-	executeInterval	1;
-	writeControl	runTime;
-	writeInterval	1;
-	timeStart		0.99998;	// Offset by -ve dT
-	timeEnd			5.00002;	// Offset by +ve dT
-	enabled			true;
+    type                fieldAverage;
+    libs                ("libfieldFunctionObjects.so");
+    executeControl      timeStep;
+    executeInterval     1;
+    writeControl        runTime;
+    writeInterval       0.5;
+    timeStart           0.99998;    // Offset by -ve dT
+    timeEnd             4.00002;    // Offset by +ve dT
+    enabled             true;
 
-	restartOnOutput		false;
-	restartOnRestart	true;
+    periodicRestart     true;
+    restartPeriod       2.50002;    // Sync with start of particle injection
 
-	fields
-	(
-		U
-		{
-			mean		true;
-			prime2Mean	true; // Resolved Reynolds Stress Tensor
-			base		time;
-		}
+    fields
+    (
+        U
+        {
+            mean            true;
+            prime2Mean      true; // Resolved Reynolds Stress Tensor
+            base            time;
+        }
 
-		p
-		{
-			mean		true;
-			prime2Mean	true; // Prime-Squared Field
-			base		time;
-		}
+        p
+        {
+            mean            true;
+            prime2Mean      true; // Prime-Squared Field
+            base            time;
+        }
 
-		Q
-		{
-			mean		true;
-			prime2Mean	false;
-			base		time;
-		}
+        Q
+        {
+            mean            true;
+            prime2Mean      false;
+            base            time;
+        }
 
-		Co
-		{
-			mean		true;
-			prime2Mean	false;
-			base		time;
-		}
+        Co
+        {
+            mean            true;
+            prime2Mean      false;
+            base            time;
+        }
 
-		yPlus
-		{
-			mean		true;
-			prime2Mean	false;
-			base		time;
-		}
-	);
+        yPlus
+        {
+            mean            true;
+            prime2Mean      false;
+            base            time;
+        }
+    );
 }
 
 // ************************************************************************* //

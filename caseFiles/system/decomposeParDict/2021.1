@@ -7,11 +7,11 @@
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-	version		2.0;
-	format		ascii;
-	class		dictionary;
-	location	"system";
-	object		decomposeParDict;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      decomposeParDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -19,26 +19,26 @@ FoamFile
 // Changelog: N/A
 // Notes: N/A
 
-// numberOfSubdomains 6;
+// numberOfSubdomains  6;
 //
-// method          hierarchical;
+// method      hierarchical;
 //
 // hierarchicalCoeffs
 // {
-// 	n               (3 2 1);	// No. Subdomains xyz
-// 	delta           1e-3; 		// Cell Skew Factor
-// 	order           xyz;		// Decomposition Order
+//     n           (3 2 1);    // No. Subdomains xyz
+//     delta       1e-3;       // Cell Skew Factor
+//     order       xyz;        // Decomposition Order
 // }
 
-numberOfSubdomains 560;
+numberOfSubdomains  560;
 
-method          hierarchical;
+method      hierarchical;
 
 hierarchicalCoeffs
 {
-	n               (28 5 4);	// No. Subdomains xyz
-	delta           1e-3; 		// Cell Skew Factor
-	order           xyz;		// Decomposition Order
+    n           (28 5 4);   // No. Subdomains xyz
+    delta       1e-3;       // Cell Skew Factor
+    order       xyz;        // Decomposition Order
 }
 
 // ************************************************************************* //

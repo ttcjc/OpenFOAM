@@ -32,35 +32,35 @@ namespace functionObjects
 
 bool Foam::functionObjects::LESresolution::calc()
 {
-	if(foundObject<volSymmTensorField>(fieldName_))
-	{
-		if
-		(
-			foundObject<volSymmTensorField>("UPrime2Mean")
-			&&
-			foundObject<volSymmTensorField>("R")
-		)
-		{
-			const volSymmTensorField& UPrime2Mean = lookupObject<volSymmTensorField>("UPrime2Mean");
-			const volSymmTensorField& R = lookupObject<volSymmTensorField>("R");
+    if(foundObject<volSymmTensorField>(fieldName_))
+    {
+        if
+        (
+            foundObject<volSymmTensorField>("UPrime2Mean")
+            &&
+            foundObject<volSymmTensorField>("R")
+        )
+        {
+            const volSymmTensorField& UPrime2Mean = lookupObject<volSymmTensorField>("UPrime2Mean");
+            const volSymmTensorField& R = lookupObject<volSymmTensorField>("R");
 
-			return store
-			(
-				resultName_,
-				tr(UPrime2Mean) / max(tr(UPrime2Mean + R), dimensionedScalar(dimensionSet(0, 2, -2, 0, 0, 0, 0), vSmall))
-			);
-		}
+            return store
+            (
+                resultName_,
+                tr(UPrime2Mean) / max(tr(UPrime2Mean + R), dimensionedScalar(dimensionSet(0, 2, -2, 0, 0, 0, 0), vSmall))
+            );
+        }
 
-		else
-		{
-			return false;
-		}
-	}
+        else
+        {
+            return false;
+        }
+    }
 
-	else
-	{
-		return false;
-	}
+    else
+    {
+        return false;
+    }
 }
 
 

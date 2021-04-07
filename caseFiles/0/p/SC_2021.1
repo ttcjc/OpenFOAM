@@ -19,32 +19,32 @@ FoamFile
 // Changelog: N/A
 // Notes: N/A
 
-dimensions		[0 2 -2 0 0 0 0];	// kg m s K mol A cd
+dimensions      [0 2 -2 0 0 0 0]; // kg m s K mol A cd
 
-internalField	uniform 0;
+internalField   uniform 0;
 
 boundaryField
 {
-	inlet
-	{
-		type	zeroGradient;
-	}
+    inlet
+    {
+        type    zeroGradient;
+    }
 
-	outlet
-	{
-		type	fixedValue;
-		value	uniform 0;
-	}
+    outlet
+    {
+        type    fixedValue;
+        value   uniform 0;
+    }
 
-	"(inletSection.*|inletBuffer.*|outletBuffer.*|outletSection.*)"
-	{
-		type	zeroGradient;
-	}
+    "(inletSection.*|inletBuffer.*|outletBuffer.*|outletSection.*)"
+    {
+        type    zeroGradient;
+    }
 
-	"(workingSection.*|windsor.*)"
-	{
-		type	zeroGradient;
-	}
+    "(workingSection.*|windsor.*)"
+    {
+        type    zeroGradient;
+    }
 }
 
 // ************************************************************************* //

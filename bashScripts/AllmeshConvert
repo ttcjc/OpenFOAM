@@ -10,4 +10,6 @@ ccm26ToFoam STAR_Mesh.ccm > log.ccm26ToFoam
 checkMesh -writeSets vtk > log.checkMesh
 
 ## Output
+echo "    Execution Time = ${SECONDS}s"
 echo "${PWD##*/} Mesh Conversion Complete"
+echo " "

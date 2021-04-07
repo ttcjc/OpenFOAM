@@ -7,11 +7,11 @@
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-	version		2.0;
-	format		ascii;
-	class		dictionary;
-	location	"system";
-	object		fvSolution;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -21,62 +21,62 @@ FoamFile
 
 solvers
 {
-	"(Phi.*|U.*|nuTilda.*)"
-	{
-		solver					GAMG;
-		smoother				GaussSeidel;
-		tolerance				1e-8;
-		relTol					0;
-		minIter					1;
+    "(Phi.*|U.*|nuTilda.*)"
+    {
+        solver                  GAMG;
+        smoother                GaussSeidel;
+        tolerance               1e-8;
+        relTol                  0;
+        minIter                 1;
 
-		cacheAgglomeration		yes;
-		agglomerator			faceAreaPair;
-		nCellsInCoursestLevel	20;
-		directSolveCoarset		false;
-		mergeLevels				1;
+        cacheAgglomeration      yes;
+        agglomerator            faceAreaPair;
+        nCellsInCoursestLevel   20;
+        directSolveCoarset      false;
+        mergeLevels             1;
 
-		nPreSweeps				0;
-		nPostSweeps				1;
-		nFinestSweeps			3;
-	}
+        nPreSweeps              0;
+        nPostSweeps             1;
+        nFinestSweeps           3;
+    }
 
-	p
-	{
-		solver					GAMG;
-		smoother				GaussSeidel;
-		tolerance				1e-5;
-		relTol					0;
-		minIter					1;
+    p
+    {
+        solver                  GAMG;
+        smoother                GaussSeidel;
+        tolerance               1e-5;
+        relTol                  0;
+        minIter                 1;
 
-		cacheAgglomeration		yes;
-		agglomerator			faceAreaPair;
-		nCellsInCoursestLevel	20;
-		directSolveCoarset		false;
-		mergeLevels				1;
+        cacheAgglomeration      yes;
+        agglomerator            faceAreaPair;
+        nCellsInCoursestLevel   20;
+        directSolveCoarset      false;
+        mergeLevels             1;
 
-		nPreSweeps				0;
-		nPostSweeps				1;
-		nFinestSweeps			3;
-	}
+        nPreSweeps              0;
+        nPostSweeps             1;
+        nFinestSweeps           3;
+    }
 
-	pFinal
-	{
-		solver					GAMG;
-		smoother				GaussSeidel;
-		tolerance				1e-6;
-		relTol					0;
-		minIter					1;
+    pFinal
+    {
+        solver                  GAMG;
+        smoother                GaussSeidel;
+        tolerance               1e-7;
+        relTol                  0;
+        minIter                 1;
 
-		cacheAgglomeration		yes;
-		agglomerator			faceAreaPair;
-		nCellsInCoursestLevel	20;
-		directSolveCoarset		false;
-		mergeLevels				1;
+        cacheAgglomeration      yes;
+        agglomerator            faceAreaPair;
+        nCellsInCoursestLevel   20;
+        directSolveCoarset      false;
+        mergeLevels             1;
 
-		nPreSweeps				0;
-		nPostSweeps				1;
-		nFinestSweeps			3;
-	}
+        nPreSweeps              0;
+        nPostSweeps             1;
+        nFinestSweeps           3;
+    }
 }
 
 relaxationFactors
@@ -85,38 +85,20 @@ relaxationFactors
 
 cache
 {
-	grad(U);
-	grad(nuTilda);
+    grad(U);
+    grad(nuTilda);
 }
 
 potentialFlow
 {
-	nNonOrthogonalCorrectors  4;
+    nNonOrthogonalCorrectors    4;
 }
 
 PISO
 {
-	momentumPredictor			yes;
-	nCorrectors					3;
-	nNonOrthogonalCorrectors	1;
+    momentumPredictor           yes;
+    nCorrectors                 3;
+    nNonOrthogonalCorrectors    1;
 }
-
-// PIMPLE
-// {
-// 	momentumPredictor			yes;
-// 	turbOnFinalIterOnly			no;
-// 	nOuterCorrectors			2;
-// 	nCorrectors					3;
-// 	nNonOrthogonalCorrectors	1;
-//
-// 	outerCorrectorResidualControl
-// 	{
-// 		"(p|U|nuTilda)"
-// 		{
-// 			tolerance	1e-4;
-// 			relTol		0;
-// 		}
-// 	}
-// }
 
 // ************************************************************************* //

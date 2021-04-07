@@ -1,3 +1,0 @@
-SOURCE = \
-DESmodelRegions/DESmodelRegions.C \
-LESresolution/LESresolution.C 

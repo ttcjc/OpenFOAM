@@ -12,27 +12,27 @@
 
 forceCoeffs
 {
-    type			forceCoeffs;
-    libs			("libforces.so");
-	executeControl	timeStep;
-	executeInterval	1;
-	writeControl	timeStep;
-	writeInterval	1;
-	// timeStart		0;
-	// timeEnd			0;
-	enabled			true;
+    type                forceCoeffs;
+    libs                ("libforces.so");
+    executeControl      timeStep;
+    executeInterval     1;
+    writeControl        timeStep;
+    writeInterval       1;
+    // timeStart           0;
+    // timeEnd             0;
+    enabled             true;
 
-    patches			("windsor.*");
-    rho				rhoInf;
-    log				true;
-    rhoInf			1.269;
-    liftDir			(0 0 1);
-    dragDir			(1 0 0);
-    CofR			(0 0 0);
-    pitchAxis		(0 1 0);
-	magUInf			40;
-    lRef			1.044;
-    Aref			0.117921;
+    patches             ("windsor.*");
+    rho                 rhoInf;
+    log                 true;
+    rhoInf              1.269;
+    liftDir             (0 0 1);
+    dragDir             (1 0 0);
+    CofR                (0 0 0);
+    pitchAxis           (0 1 0);
+    magUInf             40;
+    lRef                1.044;
+    Aref                0.117921;
 }
 
 // ************************************************************************* //

@@ -1,8 +1,7 @@
-particle/particle.C
-particle/particleIO.C
-passiveParticle/passiveParticleCloud.C
-indexedParticle/indexedParticleCloud.C
+/* particleSC */
+particleSC/particleSC.C
+particleSC/particleSCIO.C
 
-InteractionLists/referredWallFace/referredWallFace.C
 
-LIB = $(FOAM_USER_LIBBIN)/liblagrangianCJC
+/* Library Definition */
+LIB = $(FOAM_USER_LIBBIN)/liblagrangianSC

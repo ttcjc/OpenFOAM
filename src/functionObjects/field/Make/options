@@ -12,7 +12,7 @@ EXE_INC = \
     -I$(LIB_SRC)/TurbulenceModels/turbulenceModels/lnInclude \
     -I$(LIB_SRC)/TurbulenceModels/incompressible/lnInclude \
     -I$(LIB_SRC)/TurbulenceModels/compressible/lnInclude \
-	-I$(LIB_SRC)/functionObjects/field/lnInclude
+    -I$(LIB_SRC)/functionObjects/field/lnInclude
 
 LIB_LIBS = \
     -lfiniteVolume \
@@ -29,4 +29,4 @@ LIB_LIBS = \
     -lfileFormats \
     -lsampling \
     -lsurfMesh \
-	-lfieldFunctionObjects
+    -lfieldFunctionObjects

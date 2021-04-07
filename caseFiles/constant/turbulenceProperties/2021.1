@@ -7,11 +7,11 @@
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-	version		2.0;
-	format		ascii;
-	class		dictionary;
-	location	"constant";
-	object		turbulenceProperties;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      turbulenceProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -19,23 +19,23 @@ FoamFile
 // Changelog: N/A
 // Notes: N/A
 
-simulationType	LES;
+simulationType  LES;
 
 LES
 {
-	turbulence		on;
+    turbulence      on;
 
-	printCoeffs		on;
+    printCoeffs     on;
 
-	LESModel		SpalartAllmarasDDES;
+    LESModel        SpalartAllmarasDDES;
 
-	delta			maxDeltaxyz;
+    delta           maxDeltaxyz;
 
 
-	maxDeltaxyzCoeffs
-	{
-		deltaCoeff	2;
-	}
+    maxDeltaxyzCoeffs
+    {
+        deltaCoeff      2;
+    }
 }
 
 // ************************************************************************* //

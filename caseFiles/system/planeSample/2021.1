@@ -12,42 +12,42 @@
 
 planeSample
 {
-	type			surfaces;
-	libs			("libsampling.so");
-	executeControl	runTime;
-	executeInterval	0.0025;
-	writeControl	runTime;
-	writeInterval	0.0025;
-	timeStart		1;
-	timeEnd			5.00002;	// Offset by +ve dT
-	enabled			true;
+    type                surfaces;
+    libs                ("libsampling.so");
+    executeControl      runTime;
+    executeInterval     0.0025;
+    writeControl        runTime;
+    writeInterval       0.0025;
+    timeStart           1;
+    timeEnd             4.00002;    // Offset by +ve dT
+    enabled             true;
 
-	fields
-	(
-		U
-		nut
-		nuTilda
-	);
+    interpolationScheme     cellPoint;
+    surfaceFormat           foam;
 
-	interpolationScheme		cellPoint;
-	surfaceFormat			foam;
+    fields
+    (
+        U
+        nut
+        nuTilda
+    );
 
-	surfaces
-	(
-		thirdPartyExtraction
-		{
-			type		cuttingPlane;
-			planeType	pointAndNormal;
+    surfaces
+    (
+        thirdPartyExtraction
+        {
+            type        cuttingPlane;
+            planeType   pointAndNormal;
 
-			pointAndNormalDict
-			{
-				basePoint		(1.504 0 0);
-				normalVector	(1 0 0);
-			}
+            pointAndNormalDict
+            {
+                basePoint       (1.504 0 0);
+                normalVector    (1 0 0);
+            }
 
-			interpolate	false;
-		}
-	);
+            interpolate false;
+        }
+    );
 }
 
 // ************************************************************************* //

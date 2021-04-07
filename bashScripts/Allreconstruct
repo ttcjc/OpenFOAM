@@ -1,12 +1,18 @@
 #!/bin/bash
 
+## Output
 echo "${PWD##*/} Reconstruction Initiated"
 
-## Reconstruction
+## Reconstruction (Serial)
 reconstructPar > log.reconstructParRun
+
+##  Reconstruction (Parallel)
+# ls processor0 -1 -I constant -I 0 | sort -g | parallel -k -j 2 reconstructPar -newTimes -time {}
 
 ## Clean-up
 rm -rf processor* > /dev/null 2>&1
 
 ## Output
+echo "    Execution Time = ${SECONDS}s"
 echo "${PWD##*/} Reconstruction Complete"
+echo " "

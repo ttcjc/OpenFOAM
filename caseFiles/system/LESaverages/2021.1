@@ -12,35 +12,35 @@
 
 LESAverages
 {
-    type			fieldAverage;
-    libs			("libfieldFunctionObjects.so");
-	executeControl	timeStep;
-	executeInterval	1;
-	writeControl	runTime;
-	writeInterval	1;
-	timeStart		0.99998;	// Offset by -ve dT
-	timeEnd			5.00002;	// Offset by +ve dT
-	enabled			true;
+    type                fieldAverage;
+    libs                ("libfieldFunctionObjects.so");
+    executeControl      timeStep;
+    executeInterval     1;
+    writeControl        runTime;
+    writeInterval       1;
+    timeStart           0.99998;    // Offset by -ve dT
+    timeEnd             4.00002;    // Offset by +ve dT
+    enabled             true;
 
-	restartOnOutput		false;
-	restartOnRestart	true;
+    periodicRestart     true;
+    restartPeriod       2.50002;    // Sync with start of particle injection
 
-	fields
-	(
-		LESresolution
-		{
-			mean		true;
-			prime2Mean	false;
-			base		time;
-		}
+    fields
+    (
+        LESresolution
+        {
+            mean            true;
+            prime2Mean      false;
+            base            time;
+        }
 
-		DESmodelRegions
-		{
-			mean		true;
-			prime2Mean	false;
-			base		time;
-		}
-	);
+        DESmodelRegions
+        {
+            mean            true;
+            prime2Mean      false;
+            base            time;
+        }
+    );
 }
 
 // ************************************************************************* //

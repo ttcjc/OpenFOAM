@@ -1,5 +1,6 @@
 #!/bin/bash
 
+## Output
 echo "${PWD##*/} Meshing Initiated"
 
 ## blockMesh
@@ -22,4 +23,6 @@ rm -rf $(foamListTimes -latestTime) > /dev/null 2>&1
 rm -rf processor* > /dev/null 2>&1
 
 ## Output
+echo "    Execution Time = ${SECONDS}s"
 echo "${PWD##*/} Meshing Complete"
+echo " "
