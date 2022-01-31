@@ -28,9 +28,6 @@ This is a single line modification // CJC
 Transient solver for incompressible, particle-laden, turbulent flow,
 using the PISO algorithm.
 
-Designed for use in the study of automotive surface contamination at
-Loughborough University
-
 Sub-models include:
 - Turbulence modelling, i.e. laminar, RAS or LES
 - Run-time selectable MRF and finite volume options, e.g. explicit porosity
@@ -60,8 +57,4 @@ Dependencies:
 
 #### 'SC' (Surface Contamination) File Variants
 
-Variations of existing OpenFOAM files developed to support custom solver functionality without impacting existing functionality
-
-##### ThirdPartyPlaneInjection
-
-Based on KinematicLookupTableInjection. Particle injection sources read from look-up table. Each row corresponds to an individual parcel. Used alongside particle extraction functionality to replicate Third-Party contaminant sources.
+Variations of existing OpenFOAM files developed to support custom solver (pisoFoamSC) functionality without impacting native operation

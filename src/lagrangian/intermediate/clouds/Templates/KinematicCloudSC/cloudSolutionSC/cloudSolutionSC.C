@@ -39,11 +39,10 @@ Foam::cloudSolutionSC::cloudSolutionSC
     dict_(dict),
     active_(dict.lookup("active")),
     transient_(false),
+    LagrangianWrite_(0), // CJC
+    extractionPlaneList_({}), // CJC
     calcFrequency_(1),
     maxCo_(0.3),
-    LagrangianWrite_(0), // CJC
-    extractionPlane_(great), // CJC
-    surfaceTension_(72.8e-3), // CJC
     iter_(1),
     trackTime_(0),
     coupled_(false),
@@ -68,11 +67,10 @@ Foam::cloudSolutionSC::cloudSolutionSC
     dict_(cs.dict_),
     active_(cs.active_),
     transient_(cs.transient_),
+    LagrangianWrite_(cs.LagrangianWrite_), // CJC
+    extractionPlaneList_(cs.extractionPlaneList_), // CJC
     calcFrequency_(cs.calcFrequency_),
     maxCo_(cs.maxCo_),
-    LagrangianWrite_(cs.LagrangianWrite_), // CJC
-    extractionPlane_(cs.extractionPlane_), // CJC
-    surfaceTension_(cs.surfaceTension_), // CJC
     iter_(cs.iter_),
     trackTime_(cs.trackTime_),
     coupled_(cs.coupled_),
@@ -92,11 +90,10 @@ Foam::cloudSolutionSC::cloudSolutionSC
     dict_(dictionary::null),
     active_(false),
     transient_(false),
+    LagrangianWrite_(0), // CJC
+    extractionPlaneList_({}), // CJC
     calcFrequency_(0),
     maxCo_(great),
-    LagrangianWrite_(0), // CJC
-    extractionPlane_(great), // CJC
-    surfaceTension_(72.8e-3), // CJC
     iter_(0),
     trackTime_(0),
     coupled_(false),
@@ -146,8 +143,7 @@ void Foam::cloudSolutionSC::read()
     dict_.lookup("cellValueSourceCorrection") >> cellValueSourceCorrection_;
     dict_.readIfPresent("maxCo", maxCo_);
     dict_.readIfPresent("LagrangianWrite", LagrangianWrite_); // CJC
-    dict_.readIfPresent("extractionPlane", extractionPlane_); // CJC
-    dict_.readIfPresent("surfaceTension", surfaceTension_); // CJC
+    dict_.readIfPresent("extractionPlaneList", extractionPlaneList_); // CJC
 
     if (steadyState())
     {

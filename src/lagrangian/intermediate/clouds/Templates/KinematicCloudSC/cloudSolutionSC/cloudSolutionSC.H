@@ -65,6 +65,14 @@ class cloudSolutionSC
         //- Transient flag
         Switch transient_;
 
+        // CJC {
+            //- Lagrangian data write interval [timesteps]
+            label LagrangianWrite_;
+
+            //- Particle extraction planes [X m]
+            scalarList extractionPlaneList_;
+        // } CJC
+
         //- Calculation frequency - carrier steps per cloud step
         //  NOTE: Steady operation only
         label calcFrequency_;
@@ -73,17 +81,6 @@ class cloudSolutionSC
         //  Max fraction of current cell that can be traversed in a single
         //  step
         scalar maxCo_;
-
-        // CJC {
-            //- Lagrangian data write interval [timesteps]
-            label LagrangianWrite_;
-
-            //- Particle extraction plane [m]
-            scalar extractionPlane_;
-
-            //- Particle surface tension [N/m]
-            scalar surfaceTension_;
-        // } CJC
 
         //- Current cloud iteration
         label iter_;
@@ -161,22 +158,19 @@ public:
             //- Return const access to the steady flag
             inline const Switch steadyState() const;
 
+            // CJC {
+                //- Return const access to the Lagrangian data write interval
+                inline label LagrangianWrite() const;
+
+                //- Return const access to the particle extraction planes
+                inline scalarList extractionPlaneList() const;
+            // } CJC
+
             //- Return const access to the calculation frequency
             inline label calcFrequency() const;
 
             //- Return const access to the max particle Courant number
             inline scalar maxCo() const;
-
-            // CJC {
-                //- Return const access to the Lagrangian data write interval
-                inline label LagrangianWrite() const;
-
-                //- Return const access to the particle extraction plane
-                inline scalar extractionPlane() const;
-
-                //- Return const access to the particle surface tension
-                inline scalar surfaceTension() const;
-            // } CJC
 
             //- Return const access to the current cloud iteration
             inline label iter() const;

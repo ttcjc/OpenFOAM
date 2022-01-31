@@ -63,8 +63,7 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(0.0),
     tTurb_(0.0),
     UTurb_(Zero),
-    positionCartesian_(Zero), // CJC
-    Weber_(0.0) // CJC
+    positionCartesian_(Zero) // CJC
 {
     if (readFields)
     {
@@ -81,7 +80,6 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
             tTurb_ = readScalar(is);
             is >> UTurb_;
             is >> positionCartesian_; // CJC
-            Weber_ = readScalar(is); // CJC
         }
         else
         {
@@ -183,13 +181,6 @@ void Foam::KinematicParcelSC<ParcelType>::readFields(CloudType& c)
             write
         );
         c.checkFieldIOobject(c, positionCartesian);
-
-        IOField<scalar> Weber
-        (
-            c.fieldIOobject("Weber", IOobject::MUST_READ),
-            write
-        );
-        c.checkFieldIOobject(c, Weber);
     // } CJC
 
     label i = 0;
@@ -209,7 +200,6 @@ void Foam::KinematicParcelSC<ParcelType>::readFields(CloudType& c)
         p.tTurb_ = tTurb[i];
         p.UTurb_ = UTurb[i];
         p.positionCartesian_ = positionCartesian[i]; // CJC
-        p.Weber_ = Weber[i]; // CJC
 
         i++;
     }
@@ -235,7 +225,6 @@ void Foam::KinematicParcelSC<ParcelType>::writeFields(const CloudType& c)
     IOField<scalar> tTurb(c.fieldIOobject("tTurb", IOobject::NO_READ), np);
     IOField<vector> UTurb(c.fieldIOobject("UTurb", IOobject::NO_READ), np);
     IOField<vector> positionCartesian(c.fieldIOobject("positionCartesian", IOobject::NO_READ), np); // CJC
-    IOField<scalar> Weber(c.fieldIOobject("Weber", IOobject::NO_READ), np); // CJC
 
     label i = 0;
 
@@ -254,7 +243,6 @@ void Foam::KinematicParcelSC<ParcelType>::writeFields(const CloudType& c)
         tTurb[i] = p.tTurb();
         UTurb[i] = p.UTurb();
         positionCartesian[i] = p.positionCartesian(); // CJC
-        Weber[i] = p.Weber(); // CJC
 
         i++;
     }
@@ -272,7 +260,6 @@ void Foam::KinematicParcelSC<ParcelType>::writeFields(const CloudType& c)
     tTurb.write(write);
     UTurb.write(write);
     positionCartesian.write(write); // CJC
-    Weber.write(write); // CJC
 }
 
 
@@ -298,8 +285,7 @@ Foam::Ostream& Foam::operator<<
             << token::SPACE << p.age()
             << token::SPACE << p.tTurb()
             << token::SPACE << p.UTurb()
-            << token::SPACE << p.positionCartesian() // CJC
-            << token::SPACE << p.Weber(); // CJC
+            << token::SPACE << p.positionCartesian(); // CJC
     }
     else
     {

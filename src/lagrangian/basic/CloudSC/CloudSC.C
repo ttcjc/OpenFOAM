@@ -192,6 +192,11 @@ void Foam::CloudSC<ParticleType>::move
     // Clear the global positions as there are about to change
     globalPositionsPtr_.clear();
 
+    // CJC {
+        // Store extraction plane locations
+        const scalarList planeListPos = cloud.solution().extractionPlaneList();
+    // } CJC
+
     // While there are particles to transfer
     while (true)
     {
@@ -206,19 +211,38 @@ void Foam::CloudSC<ParticleType>::move
         {
             ParticleType& p = pIter();
 
+            // CJC {
+                // Store particle position prior to evolution
+                vector initialPosition = p.position();
+            // } CJC
+
             // Move the particle
             bool keepParticle = p.move(cloud, td, trackTime);
 
             // CJC {
-                if (cloud.solution().extractionPlane() != great)
+                if (planeListPos.size() != 0)
                 {
-                    if (p.active() && p.position().x() > cloud.solution().extractionPlane())
+                    forAll(planeListPos, i)
                     {
-                        // Pout << "Parcel " << p.origId() << " crossed extraction plane" << nl;
-                        extractPlaneData(p);
-                        // Pout << "Extracted parcel" << nl;
-                        keepParticle = false;
-                        // Pout << "Labelled parcel for deletion" << nl << nl;
+
+
+                        // Check if particle has crossed the extraction plane
+                        if
+                        (
+                            (p.active() && (initialPosition.x() < planeListPos[i] && p.position().x() > planeListPos[i])) ||
+                            (p.active() && (initialPosition.x() > planeListPos[i] && p.position().x() < planeListPos[i]))
+                        )
+                        {
+                            // Extract particle data
+                            extractPlaneData(p, planeListPos[i]);
+
+                            // Check if particle has crossed the final extraction plane
+                            if (i == planeListPos.size() - 1)
+                            {
+                                // Flag particle for deletion
+                                keepParticle = false;
+                            }
+                        }
                     }
                 }
             // } CJC
@@ -426,11 +450,17 @@ void Foam::CloudSC<ParticleType>::storeGlobalPositions() const
 
 // CJC {
     template<class ParticleType>
-    void Foam::CloudSC<ParticleType>::extractPlaneData(ParticleType& p) const
+    void Foam::CloudSC<ParticleType>::extractPlaneData
+    (
+        ParticleType& p,
+        scalar planePos
+    )
     {
+        word fileName = Foam::name(planePos);
+
         OFstream planeData
         (
-            "extractionPlaneData/LagrangianExtractionPlaneData",
+            "LagrangianExtractionPlane/LagrangianExtractionPlaneData_" + fileName,
             IOstream::ASCII,
             IOstream::currentVersion,
             IOstream::UNCOMPRESSED,

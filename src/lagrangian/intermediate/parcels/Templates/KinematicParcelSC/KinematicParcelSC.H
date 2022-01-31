@@ -296,9 +296,6 @@ protected:
             // CJC {
                 //- Position in Cartesian coordinates [m]
                 vector positionCartesian_;
-
-                //- Weber number
-                scalar Weber_;
             // } CJC
 
 
@@ -342,7 +339,6 @@ public:
           + " tTurb"
           + " (UTurbx UTurby UTurbz)"
           + " (positionCartesianx positionCartesiany positionCartesianz)" // CJC
-          + " Weber" // CJC
         );
 
 
@@ -470,9 +466,6 @@ public:
             // CJC {
                 //- Return const access to position in Cartesian coordinates
                 inline const vector& positionCartesian() const;
-
-                //- Return const access to Weber number
-                inline scalar Weber() const;
             // } CJC
 
 
@@ -511,9 +504,6 @@ public:
             // CJC {
                 //- Return access to position in Cartesian coordinates
                 inline vector& positionCartesian();
-
-                //- Return access to Weber number
-                inline scalar& Weber();
             // } CJC
 
 

@@ -71,6 +71,20 @@ inline const Foam::Switch Foam::cloudSolutionSC::steadyState() const
 }
 
 
+// CJC {
+    inline Foam::label Foam::cloudSolutionSC::LagrangianWrite() const
+    {
+        return LagrangianWrite_;
+    }
+
+
+    inline Foam::scalarList Foam::cloudSolutionSC::extractionPlaneList() const
+    {
+        return extractionPlaneList_;
+    }
+// } CJC
+
+
 inline Foam::label Foam::cloudSolutionSC::calcFrequency() const
 {
     return calcFrequency_;
@@ -81,25 +95,6 @@ inline Foam::scalar Foam::cloudSolutionSC::maxCo() const
 {
     return maxCo_;
 }
-
-
-// CJC {
-    inline Foam::label Foam::cloudSolutionSC::LagrangianWrite() const
-    {
-        return LagrangianWrite_;
-    }
-
-
-    inline Foam::scalar Foam::cloudSolutionSC::extractionPlane() const
-    {
-        return extractionPlane_;
-    }
-
-    inline Foam::scalar Foam::cloudSolutionSC::surfaceTension() const
-    {
-        return surfaceTension_;
-    }
-// } CJC
 
 
 inline Foam::label Foam::cloudSolutionSC::iter() const

@@ -274,7 +274,7 @@ public:
                 // Particle Data Extraction
 
                     //- Write extraction plane data
-                    void extractPlaneData(ParticleType&) const;
+                    void extractPlaneData(ParticleType& p, scalar planePos);
             // } CJC
 
 

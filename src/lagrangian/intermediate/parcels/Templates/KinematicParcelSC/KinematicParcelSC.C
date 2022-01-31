@@ -247,8 +247,7 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(p.age_),
     tTurb_(p.tTurb_),
     UTurb_(p.UTurb_),
-    positionCartesian_(p.positionCartesian_), // CJC
-    Weber_(p.Weber_) // CJC
+    positionCartesian_(p.positionCartesian_) // CJC
 {}
 
 
@@ -270,8 +269,7 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(p.age_),
     tTurb_(p.tTurb_),
     UTurb_(p.UTurb_),
-    positionCartesian_(p.positionCartesian_), // CJC
-    Weber_(p.Weber_) // CJC
+    positionCartesian_(p.positionCartesian_) // CJC
 {}
 
 
@@ -369,9 +367,6 @@ bool Foam::KinematicParcelSC<ParcelType>::move
     // CJC {
         // Store final position in Cartesian coordinates
         p.positionCartesian() = p.position();
-
-        // Store Weber number
-        p.Weber() = p.We(ttd, cloud.solution().surfaceTension());
     // } CJC
 
     return ttd.keepParticle;
