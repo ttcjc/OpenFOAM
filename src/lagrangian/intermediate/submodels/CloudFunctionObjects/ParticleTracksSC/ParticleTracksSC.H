@@ -35,7 +35,7 @@ SourceFiles
 #ifndef ParticleTracksSC_H
 #define ParticleTracksSC_H
 
-#include "CloudFunctionObject.H"
+#include "CloudFunctionObjectSC.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -49,7 +49,7 @@ namespace Foam
 template<class CloudType>
 class ParticleTracksSC
 :
-    public CloudFunctionObject<CloudType>
+    public CloudFunctionObjectSC<CloudType>
 {
     // Private Data
 
@@ -89,7 +89,7 @@ protected:
 public:
 
     //- Runtime type information
-    TypeName("particleTracks");
+    TypeName("particleTracksSC");
 
 
     // Constructors
@@ -106,9 +106,9 @@ public:
         ParticleTracksSC(const ParticleTracksSC<CloudType>& ppm);
 
         //- Construct and return a clone
-        virtual autoPtr<CloudFunctionObject<CloudType>> clone() const
+        virtual autoPtr<CloudFunctionObjectSC<CloudType>> clone() const
         {
-            return autoPtr<CloudFunctionObject<CloudType>>
+            return autoPtr<CloudFunctionObjectSC<CloudType>>
             (
                 new ParticleTracksSC<CloudType>(*this)
             );

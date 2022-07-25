@@ -714,8 +714,8 @@ Foam::scalar Foam::particleSC::trackToStationaryTri
 
     if (debug)
     {
-        Info<< "Particle " << origId() << endl << "Tracking from " << x0
-            << " along " << x1 << " to " << x0 + x1 << endl;
+        Info << "Particle " << origId() << endl << "Tracking from " << x0
+             << " along " << x1 << " to " << x0 + x1 << endl;
     }
 
     // Get the tet geometry
@@ -728,10 +728,10 @@ Foam::scalar Foam::particleSC::trackToStationaryTri
     {
         vector o, b, v1, v2;
         stationaryTetGeometry(o, b, v1, v2);
-        Info<< "Tet points o=" << o << ", b=" << b
-            << ", v1=" << v1 << ", v2=" << v2 << endl
-            << "Tet determinant = " << detA << endl
-            << "Start local coordinates = " << y0 << endl;
+        Info << "Tet points o=" << o << ", b=" << b
+             << ", v1=" << v1 << ", v2=" << v2 << endl
+             << "Tet determinant = " << detA << endl
+             << "Start local coordinates = " << y0 << endl;
     }
 
     // Calculate the local tracking displacement
@@ -739,7 +739,7 @@ Foam::scalar Foam::particleSC::trackToStationaryTri
 
     if (debug)
     {
-        Info<< "Local displacement = " << Tx1 << "/" << detA << endl;
+        Info << "Local displacement = " << Tx1 << "/" << detA << endl;
     }
 
     // Calculate the hit fraction
@@ -753,9 +753,9 @@ Foam::scalar Foam::particleSC::trackToStationaryTri
 
             if (debug)
             {
-                Info<< "Hit on tet face " << i << " at local coordinate "
-                    << y0 + mu*Tx1 << ", " << mu*detA*100 << "% of the "
-                    << "way along the track" << endl;
+                Info << "Hit on tet face " << i << " at local coordinate "
+                     << y0 + mu*Tx1 << ", " << mu*detA*100 << "% of the "
+                     << "way along the track" << endl;
             }
 
             if (0 <= mu && mu < muH)
@@ -789,17 +789,17 @@ Foam::scalar Foam::particleSC::trackToStationaryTri
     {
         if (iH != -1)
         {
-            Info<< "Track hit tet face " << iH << " first" << endl;
+            Info << "Track hit tet face " << iH << " first" << endl;
         }
         else
         {
-            Info<< "Track hit no tet faces" << endl;
+            Info << "Track hit no tet faces" << endl;
         }
-        Info<< "End local coordinates = " << yH << endl
-            << "End global coordinates = " << position() << endl
-            << "Tracking displacement = " << position() - x0 << endl
-            << muH*detA*100 << "% of the step from " << stepFraction_ << " to "
-            << stepFraction_ + fraction << " completed" << endl << endl;
+        Info << "End local coordinates = " << yH << endl
+             << "End global coordinates = " << position() << endl
+             << "Tracking displacement = " << position() - x0 << endl
+             << muH*detA*100 << "% of the step from " << stepFraction_ << " to "
+             << stepFraction_ + fraction << " completed" << endl << endl;
     }
 
     // Set the proportion of the track that has been completed
@@ -838,8 +838,8 @@ Foam::scalar Foam::particleSC::trackToMovingTri
 
     if (debug)
     {
-        Info<< "Particle " << origId() << endl << "Tracking from " << x0
-            << " along " << x1 << " to " << x0 + x1 << endl;
+        Info << "Particle " << origId() << endl << "Tracking from " << x0
+             << " along " << x1 << " to " << x0 + x1 << endl;
     }
 
     // Get the tet geometry
@@ -852,10 +852,10 @@ Foam::scalar Foam::particleSC::trackToMovingTri
     {
         Pair<vector> o, b, v1, v2;
         movingTetGeometry(fraction, o, b, v1, v2);
-        Info<< "Tet points o=" << o[0] << ", b=" << b[0]
-            << ", v1=" << v1[0] << ", v2=" << v2[0] << endl
-            << "Tet determinant = " << detA[0] << endl
-            << "Start local coordinates = " << y0[0] << endl;
+        Info << "Tet points o=" << o[0] << ", b=" << b[0]
+             << ", v1=" << v1[0] << ", v2=" << v2[0] << endl
+             << "Tet determinant = " << detA[0] << endl
+             << "Start local coordinates = " << y0[0] << endl;
     }
 
     // Get the relative global position
@@ -882,10 +882,10 @@ Foam::scalar Foam::particleSC::trackToMovingTri
     {
         for (label i = 0; i < 4; ++ i)
         {
-            Info<< (i ? "             " : "Hit equation ") << i << " = "
-                << hitEqn[i] << endl;
+            Info << (i ? "             " : "Hit equation ") << i << " = "
+                 << hitEqn[i] << endl;
         }
-        Info<< " DetA equation = " << detA << endl;
+        Info << " DetA equation = " << detA << endl;
     }
 
     // Calculate the hit fraction
@@ -914,9 +914,9 @@ Foam::scalar Foam::particleSC::trackToMovingTri
                     );
                     const scalar detAH = detAEqn.value(mu[j]);
 
-                    Info<< "Hit on tet face " << i << " at local coordinate "
-                        << yH/detAH << ", " << mu[j]*detA[0]*100 << "% of the "
-                        << "way along the track" << endl;
+                    Info << "Hit on tet face " << i << " at local coordinate "
+                         << yH/detAH << ", " << mu[j]*detA[0]*100 << "% of the "
+                         << "way along the track" << endl;
                 }
 
                 if (0 <= mu[j] && mu[j] < muH)
@@ -992,18 +992,18 @@ Foam::scalar Foam::particleSC::trackToMovingTri
     {
         if (iH != -1)
         {
-            Info<< "Track hit tet face " << iH << " first" << endl;
+            Info << "Track hit tet face " << iH << " first" << endl;
         }
         else
         {
-            Info<< "Track hit no tet faces" << endl;
+            Info << "Track hit no tet faces" << endl;
         }
-        Info<< "End local coordinates = " << yH << endl
-            << "End global coordinates = " << position() << endl
-            << "Tracking displacement = " << position() - x0 << endl
-            << muH*detA[0]*100 << "% of the step from " << stepFraction_
-            << " to " << stepFraction_ + fraction << " completed" << endl
-            << endl;
+        Info << "End local coordinates = " << yH << endl
+             << "End global coordinates = " << position() << endl
+             << "Tracking displacement = " << position() - x0 << endl
+             << muH*detA[0]*100 << "% of the step from " << stepFraction_
+             << " to " << stepFraction_ + fraction << " completed" << endl
+             << endl;
     }
 
     return iH != -1 ? 1 - muH*detA[0] : 0;

@@ -218,7 +218,7 @@ void Foam::KinematicCloudSC<CloudType>::evolveCloud
         injectors_.injectSteadyState(cloud, td, solution_.trackTime());
 
         td.part() = parcelType::trackingData::tpLinearTrack;
-        CloudType::move(cloud, td, solution_.trackTime());
+        CloudType::move(cloud, td, solution_.trackTime(), solution_.extractionPlaneList(), solution_.geometryBoundingBox());
     }
 }
 
@@ -226,7 +226,7 @@ void Foam::KinematicCloudSC<CloudType>::evolveCloud
 template<class CloudType>
 void Foam::KinematicCloudSC<CloudType>::postEvolve()
 {
-    Info<< endl;
+    Info << endl;
 
     if (debug)
     {
@@ -241,14 +241,6 @@ void Foam::KinematicCloudSC<CloudType>::postEvolve()
 
     solution_.nextIter();
 
-    // CJC {
-        if (solution_.LagrangianWrite() > 0 && solution_.output() && returnReduce(this->size(), sumOp<label>()) > 0)
-        {
-            Info << "Writing cloud data" << nl << nl;
-            this->write();
-        }
-    // } CJC
-
     if (this->db().time().writeTime())
     {
         outputProperties_.writeObject
@@ -259,6 +251,14 @@ void Foam::KinematicCloudSC<CloudType>::postEvolve()
             true
         );
     }
+
+// CJC {
+        // Write Particle Properties
+        if (solution_.LagrangianWrite() != 0 && solution_.output())
+        {
+            this->write();
+        }
+    // } CJC
 }
 
 
@@ -664,7 +664,7 @@ void Foam::KinematicCloudSC<CloudType>::preEvolve()
     // with topology change due to lazy evaluation of valid mesh dimensions
     label nGeometricD = mesh_.nGeometricD();
 
-    Info<< "\nSolving " << nGeometricD << "-D cloud " << this->name() << endl;
+    Info << "\nSolving " << nGeometricD << "-D cloud " << this->name() << endl;
 
     this->dispersion().cacheFields(true);
     forces_.cacheFields(true);
@@ -698,7 +698,7 @@ void Foam::KinematicCloudSC<CloudType>::motion
 )
 {
     td.part() = parcelType::trackingData::tpLinearTrack;
-    CloudType::move(cloud, td, solution_.trackTime());
+    CloudType::move(cloud, td, solution_.trackTime(), solution_.extractionPlaneList(), solution_.geometryBoundingBox());
 
     updateCellOccupancy();
 }
@@ -774,17 +774,17 @@ void Foam::KinematicCloudSC<CloudType>::info()
     scalar linearKineticEnergy = linearKineticEnergyOfSystem();
     reduce(linearKineticEnergy, sumOp<scalar>());
 
-    Info<< "Cloud: " << this->name() << nl
-        << "    Current number of parcels       = "
-        << returnReduce(this->size(), sumOp<label>()) << nl
-        << "    Current mass in system          = "
-        << returnReduce(massInSystem(), sumOp<scalar>()) << nl
-        << "    Linear momentum                 = "
-        << linearMomentum << nl
-        << "   |Linear momentum|                = "
-        << mag(linearMomentum) << nl
-        << "    Linear kinetic energy           = "
-        << linearKineticEnergy << nl;
+    Info << "Cloud: " << this->name() << nl
+         << "    Current number of parcels       = "
+         << returnReduce(this->size(), sumOp<label>()) << nl
+         << "    Current mass in system          = "
+         << returnReduce(massInSystem(), sumOp<scalar>()) << nl
+         << "    Linear momentum                 = "
+         << linearMomentum << nl
+         << "   |Linear momentum|                = "
+         << mag(linearMomentum) << nl
+         << "    Linear kinetic energy           = "
+         << linearKineticEnergy << nl;
 
     injectors_.info(Info);
     this->surfaceFilm().info(Info);

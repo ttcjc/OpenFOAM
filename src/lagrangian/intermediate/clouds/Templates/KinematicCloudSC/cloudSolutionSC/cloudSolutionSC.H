@@ -66,11 +66,14 @@ class cloudSolutionSC
         Switch transient_;
 
         // CJC {
-            //- Lagrangian data write interval [timesteps]
+            //- Lagrangian data write interval <n> [timesteps]
             label LagrangianWrite_;
 
-            //- Particle extraction planes [X m]
+            //- Streamwise position of particle extraction planes <(P1 P2 P3...)> [m]
             scalarList extractionPlaneList_;
+
+            //- Geometry boundary box <(X1, X2, Y1, Y2, Z1, Z2)> [m]
+            scalarList geometryBoundingBox_;
         // } CJC
 
         //- Calculation frequency - carrier steps per cloud step
@@ -164,6 +167,9 @@ public:
 
                 //- Return const access to the particle extraction planes
                 inline scalarList extractionPlaneList() const;
+
+                //- Return const access to the geometry bounding box
+                inline scalarList geometryBoundingBox() const;
             // } CJC
 
             //- Return const access to the calculation frequency

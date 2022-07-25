@@ -142,7 +142,9 @@ void Foam::CloudSC<ParticleType>::move
 (
     TrackCloudType& cloud,
     typename ParticleType::trackingData& td,
-    const scalar trackTime
+    const scalar trackTime,
+    const scalarList extractionPlanePosition,
+    const scalarList geometryBoundingBox
 )
 {
     const polyBoundaryMesh& pbm = pMesh().boundaryMesh();
@@ -192,11 +194,6 @@ void Foam::CloudSC<ParticleType>::move
     // Clear the global positions as there are about to change
     globalPositionsPtr_.clear();
 
-    // CJC {
-        // Store extraction plane locations
-        const scalarList planeListPos = cloud.solution().extractionPlaneList();
-    // } CJC
-
     // While there are particles to transfer
     while (true)
     {
@@ -212,7 +209,7 @@ void Foam::CloudSC<ParticleType>::move
             ParticleType& p = pIter();
 
             // CJC {
-                // Store particle position prior to evolution
+                // Store particle position prior to evolution (used for planar extraction)
                 vector initialPosition = p.position();
             // } CJC
 
@@ -220,29 +217,49 @@ void Foam::CloudSC<ParticleType>::move
             bool keepParticle = p.move(cloud, td, trackTime);
 
             // CJC {
-                if (planeListPos.size() != 0)
+                // Check for presence of extraction planes
+                if (extractionPlanePosition.size() != 0)
                 {
-                    forAll(planeListPos, i)
+                    // Loop over extraction planes
+                    forAll(extractionPlanePosition, i)
                     {
-
-
-                        // Check if particle has crossed the extraction plane
+                        // Check if particle has crossed current extraction plane
                         if
                         (
-                            (p.active() && (initialPosition.x() < planeListPos[i] && p.position().x() > planeListPos[i])) ||
-                            (p.active() && (initialPosition.x() > planeListPos[i] && p.position().x() < planeListPos[i]))
+                            (p.active() && (initialPosition.x() < extractionPlanePosition[i] && p.position().x() > extractionPlanePosition[i])) ||
+                            (p.active() && (initialPosition.x() > extractionPlanePosition[i] && p.position().x() < extractionPlanePosition[i]))
                         )
                         {
-                            // Extract particle data
-                            extractPlaneData(p, planeListPos[i]);
+                            // Extract particle data from extraction plane
+                            extractPlaneData(p, extractionPlanePosition[i]);
 
-                            // Check if particle has crossed the final extraction plane
-                            if (i == planeListPos.size() - 1)
+                            // Check if particle has crossed final extraction plane
+                            if (i == extractionPlanePosition.size() - 1)
                             {
                                 // Flag particle for deletion
                                 keepParticle = false;
                             }
                         }
+                    }
+                }
+
+                // Check for presence of valid geometry bounding box
+                if (geometryBoundingBox.size() == 6)
+                {
+                    // Check if particle is inactive (i.e. it has struck the test geometry)
+                    if
+                    (
+                        !p.active() &&
+                        (p.position().x() > (geometryBoundingBox[0] - 1e-7) && p.position().x() < (geometryBoundingBox[1] + 1e-7)) &&
+                        (p.position().y() > (geometryBoundingBox[2] - 1e-7) && p.position().y() < (geometryBoundingBox[3] + 1e-7)) &&
+                        (p.position().z() > (geometryBoundingBox[4] - 1e-7) && p.position().z() < (geometryBoundingBox[5] + 1e-7))
+                    )
+                    {
+                        // Extract particle data from test geometry
+                        extractSoilingData(p);
+
+                        // Flag particle for deletion
+                        keepParticle = false;
                     }
                 }
             // } CJC
@@ -467,15 +484,46 @@ void Foam::CloudSC<ParticleType>::storeGlobalPositions() const
             true
         );
 
-        planeData << p.positionCartesian().x() << " "
+        planeData << time().value() << " "
+                  << p.origId() << " "
+                  << p.origProc() << " "
+                  << p.d() << " "
+                  << p.nParticle() << " "
+                  << p.positionCartesian().x() << " "
                   << p.positionCartesian().y() << " "
                   << p.positionCartesian().z() << " "
                   << p.U().x() << " "
                   << p.U().y() << " "
-                  << p.U().z() << " "
-                  << p.d() << " "
-                  << p.nParticle() << " "
-                  << time().value() << nl;
+                  << p.U().z() << nl;
+    }
+
+
+    template<class ParticleType>
+    void Foam::CloudSC<ParticleType>::extractSoilingData
+    (
+        ParticleType& p
+    )
+    {
+        OFstream surfaceData
+        (
+            "LagrangianSurfaceContamination/LagrangianSurfaceContaminationData",
+            IOstream::ASCII,
+            IOstream::currentVersion,
+            IOstream::UNCOMPRESSED,
+            true
+        );
+
+        surfaceData << time().value() << " "
+                    << p.origId() << " "
+                    << p.origProc() << " "
+                    << p.d() << " "
+                    << p.nParticle() << " "
+                    << p.positionCartesian().x() << " "
+                    << p.positionCartesian().y() << " "
+                    << p.positionCartesian().z() << " "
+                    << p.U().x() << " "
+                    << p.U().y() << " "
+                    << p.U().z() << nl;
     }
 // } CJC
 

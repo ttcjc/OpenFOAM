@@ -63,7 +63,7 @@ SourceFiles
 #include "cloudSolutionSC.H"
 
 #include "ParticleForceList.H"
-#include "CloudFunctionObjectList.H"
+#include "CloudFunctionObjectListSC.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -117,7 +117,7 @@ public:
         typedef ParticleForceList<KinematicCloudSC<CloudType>> forceType;
 
         //- Function object type
-        typedef CloudFunctionObjectList<KinematicCloudSC<CloudType>>
+        typedef CloudFunctionObjectListSC<KinematicCloudSC<CloudType>>
             functionType;
 
 

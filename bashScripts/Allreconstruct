@@ -3,16 +3,16 @@
 ## Output
 echo "${PWD##*/} Reconstruction Initiated"
 
-## Reconstruction (Serial)
-reconstructPar > log.reconstructParRun
+# ## Reconstruct (Latest Time)
+# reconstructPar -latestTime > log.reconstructParRunLatest
 
-##  Reconstruction (Parallel)
-# ls processor0 -1 -I constant -I 0 | sort -g | parallel -k -j 2 reconstructPar -newTimes -time {}
+## Reconstruct (Full Case)
+(foamListTimes; foamListTimes -processor) | sort -g | uniq -u | parallel -k -j 3 reconstructPar -newTimes -time {} > log.reconstructParRun
 
-## Clean-up
-rm -rf processor* > /dev/null 2>&1
+# ## Clean
+# rm -rf processor* > /dev/null 2>&1
 
 ## Output
 echo "    Execution Time = ${SECONDS}s"
 echo "${PWD##*/} Reconstruction Complete"
-echo " "
+echo

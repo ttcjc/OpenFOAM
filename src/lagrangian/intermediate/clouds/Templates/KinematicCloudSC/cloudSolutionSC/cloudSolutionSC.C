@@ -41,6 +41,7 @@ Foam::cloudSolutionSC::cloudSolutionSC
     transient_(false),
     LagrangianWrite_(0), // CJC
     extractionPlaneList_({}), // CJC
+    geometryBoundingBox_({}), // CJC
     calcFrequency_(1),
     maxCo_(0.3),
     iter_(1),
@@ -69,6 +70,7 @@ Foam::cloudSolutionSC::cloudSolutionSC
     transient_(cs.transient_),
     LagrangianWrite_(cs.LagrangianWrite_), // CJC
     extractionPlaneList_(cs.extractionPlaneList_), // CJC
+    geometryBoundingBox_(cs.geometryBoundingBox_), // CJC
     calcFrequency_(cs.calcFrequency_),
     maxCo_(cs.maxCo_),
     iter_(cs.iter_),
@@ -92,6 +94,7 @@ Foam::cloudSolutionSC::cloudSolutionSC
     transient_(false),
     LagrangianWrite_(0), // CJC
     extractionPlaneList_({}), // CJC
+    geometryBoundingBox_({}), // CJC
     calcFrequency_(0),
     maxCo_(great),
     iter_(0),
@@ -144,6 +147,7 @@ void Foam::cloudSolutionSC::read()
     dict_.readIfPresent("maxCo", maxCo_);
     dict_.readIfPresent("LagrangianWrite", LagrangianWrite_); // CJC
     dict_.readIfPresent("extractionPlaneList", extractionPlaneList_); // CJC
+    dict_.readIfPresent("geometryBoundingBox", geometryBoundingBox_); // CJC
 
     if (steadyState())
     {
@@ -260,11 +264,7 @@ bool Foam::cloudSolutionSC::output() const
         }
         else
         {
-            return active_ &&
-            (
-                mesh_.time().writeTime() ||
-                mesh_.time().timeIndex() % LagrangianWrite_ == 0
-            );
+            return active_ && ((mesh_.time().writeTime()) || (mesh_.time().timeIndex() % LagrangianWrite_ == 0));
         }
     // } CJC
 }

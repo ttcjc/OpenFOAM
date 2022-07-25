@@ -82,6 +82,12 @@ inline const Foam::Switch Foam::cloudSolutionSC::steadyState() const
     {
         return extractionPlaneList_;
     }
+
+
+    inline Foam::scalarList Foam::cloudSolutionSC::geometryBoundingBox() const
+    {
+        return geometryBoundingBox_;
+    }
 // } CJC
 
 

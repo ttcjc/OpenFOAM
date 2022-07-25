@@ -62,7 +62,7 @@ Foam::ParticleTracksSC<CloudType>::ParticleTracksSC
     const word& modelName
 )
 :
-    CloudFunctionObject<CloudType>(dict, owner, modelName, typeName),
+    CloudFunctionObjectSC<CloudType>(dict, owner, modelName, typeName),
     trackInterval_(readLabel(this->coeffDict().lookup("trackInterval"))),
     maxSamples_(readLabel(this->coeffDict().lookup("maxSamples"))),
     resetOnWrite_(this->coeffDict().lookup("resetOnWrite")),
@@ -77,7 +77,7 @@ Foam::ParticleTracksSC<CloudType>::ParticleTracksSC
     const ParticleTracksSC<CloudType>& ppm
 )
 :
-    CloudFunctionObject<CloudType>(ppm),
+    CloudFunctionObjectSC<CloudType>(ppm),
     trackInterval_(ppm.trackInterval_),
     maxSamples_(ppm.maxSamples_),
     resetOnWrite_(ppm.resetOnWrite_),

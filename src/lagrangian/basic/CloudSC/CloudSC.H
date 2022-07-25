@@ -213,7 +213,9 @@ public:
             (
                 TrackCloudType& cloud,
                 typename ParticleType::trackingData& td,
-                const scalar trackTime
+                const scalar trackTime,
+                const scalarList extractionPlanePosition,
+                const scalarList geometryBoundingBox
             );
 
             //- Remap the cells of particles corresponding to the
@@ -275,6 +277,9 @@ public:
 
                     //- Write extraction plane data
                     void extractPlaneData(ParticleType& p, scalar planePos);
+
+                    //- Write surface contamination data
+                    void extractSoilingData(ParticleType& p);
             // } CJC
 
 

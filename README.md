@@ -1,10 +1,10 @@
 # OpenFOAM
 
-Modifications to OpenFOAM v7, improving Lagrangian multi-phase functionality for use in the study of automotive surface contamination at Loughborough University
+Modifications to OpenFOAM v7, improving Lagrangian multi-phase functionality for use in the study of automotive surface contamination at Loughborough University.
 
 #### Existing OpenFOAM Files
 
-Any minor additions or alterations made to existing OpenFOAM files are denoted by the inclusion of *CJC* comments
+Any minor additions or alterations made to existing OpenFOAM files are denoted by the inclusion of *CJC* comments.
 
 For example:
 
@@ -39,22 +39,19 @@ Sub-models include:
 
 ##### DESModelRegions
 
-Brings DESModelRegions functionality from OpenFOAM v2.3 to OpenFOAM v7 based on [wyldckat's](https://github.com/wyldckat/DESModelRegions) own implementation for OpenFOAM v5 and OpenFOAM v6
+Brings DESModelRegions functionality from OpenFOAM v2.3 to OpenFOAM v7 based on [wyldckat's](https://github.com/wyldckat/DESModelRegions) own implementation for OpenFOAM v5 and OpenFOAM v6.
 
 Outputs an indicator of RAS and LES regions within a DES simulation:
 - '0' indicates RAS
 - '1' indicates LES
 
-##### LESresolution
-
-Outputs the ratio of resolved turbulent kinetic energy to total turbulent kinetic energy within LES or DES simulations
-
-Dependencies:
-- fieldAverage function to obtain UPrime2Mean (Resolved Reynolds Stress Tensor)
-- turbulenceFields function to obtain R (Subgrid Reynolds Stress Tensor)
-
 ### lagrangian
 
 #### 'SC' (Surface Contamination) File Variants
 
-Variations of existing OpenFOAM files developed to support custom solver (pisoFoamSC) functionality without impacting native operation
+Variations of existing OpenFOAM files developed to support custom solver (pisoFoamSC) functionality without impacting native operation.
+
+Additional functionality includes:
+- Recording of Lagrangian data to separate file(s) as particles cross user-defined streamwise plane(s) of interest
+- Recording of impinging particles to separate file (reducing storage requirements)
+- Ability to record Lagrangian data at user-defined time interval (separate from Eulerian phase)

@@ -13,9 +13,10 @@ rm -rf constant/triSurface/*.eMesh > /dev/null 2>&1
 rm -rf *.err > /dev/null 2>&1
 rm -rf *.out > /dev/null 2>&1
 rm -rf 0/cell* > /dev/null 2>&1
-sed -i 9q extractionPlaneData/LagrangianExtractionPlaneData
+rm -rf LagrangianExtractionPlane/* > /dev/null 2>&1
+rm -rf LagrangianSurfaceContamination/* > /dev/null 2>&1
 
 ## Output
 echo "    Execution Time = ${SECONDS}s"
 echo "${PWD##*/} Cleaning Complete"
-echo " "
+echo

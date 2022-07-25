@@ -1,0 +1,43 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      turbulenceProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Revision 2022.1
+// Changelog: N/A
+// Notes: N/A
+
+
+simulationType  LES;
+
+LES
+{
+    turbulence      on;
+
+    printCoeffs     on;
+
+    LESModel        SpalartAllmarasIDDES;
+
+    delta			IDDESDelta;
+
+
+	IDDESDeltaCoeffs
+	{
+	    deltaCoeff     2;
+	    Cw             0.15;
+	}
+}
+
+// ************************************************************************* //

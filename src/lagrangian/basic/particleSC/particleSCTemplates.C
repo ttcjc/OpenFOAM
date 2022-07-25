@@ -316,8 +316,8 @@ void Foam::particleSC::hitCyclicAMIPatch
 
     if (debug)
     {
-        Info<< "Particle " << origId() << " crossing AMI from " << cpp.name()
-            << " to " << receiveCpp.name() << endl << endl;
+        Info << "Particle " << origId() << " crossing AMI from " << cpp.name()
+             << " to " << receiveCpp.name() << endl << endl;
     }
 
     // Get the send patch data

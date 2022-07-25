@@ -28,31 +28,31 @@ License
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include "FacePostProcessing.H"
-#include "ParticleCollector.H"
-#include "ParticleErosion.H"
+#include "FacePostProcessingSC.H"
+#include "ParticleCollectorSC.H"
+#include "ParticleErosionSC.H"
 #include "ParticleTracksSC.H"
-#include "ParticleTrap.H"
-#include "PatchCollisionDensity.H"
-#include "PatchPostProcessing.H"
-#include "RelativeVelocity.H"
-#include "VoidFraction.H"
+#include "ParticleTrapSC.H"
+#include "PatchCollisionDensitySC.H"
+#include "PatchPostProcessingSC.H"
+#include "RelativeVelocitySC.H"
+#include "VoidFractionSC.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #define makeParcelCloudFunctionObjectsSC(CloudType)                            \
                                                                                \
-    makeCloudFunctionObject(CloudType);                                        \
+    makeCloudFunctionObjectSC(CloudType);                                      \
                                                                                \
-    makeCloudFunctionObjectType(FacePostProcessing, CloudType);                \
-    makeCloudFunctionObjectType(ParticleCollector, CloudType);                 \
-    makeCloudFunctionObjectType(ParticleErosion, CloudType);                   \
-    makeCloudFunctionObjectType(ParticleTracksSC, CloudType);                  \
-    makeCloudFunctionObjectType(ParticleTrap, CloudType);                      \
-    makeCloudFunctionObjectType(PatchCollisionDensity, CloudType);             \
-    makeCloudFunctionObjectType(PatchPostProcessing, CloudType);               \
-    makeCloudFunctionObjectType(RelativeVelocity, CloudType);                  \
-    makeCloudFunctionObjectType(VoidFraction, CloudType);
+    makeCloudFunctionObjectSCType(FacePostProcessingSC, CloudType);            \
+    makeCloudFunctionObjectSCType(ParticleCollectorSC, CloudType);             \
+    makeCloudFunctionObjectSCType(ParticleErosionSC, CloudType);               \
+    makeCloudFunctionObjectSCType(ParticleTracksSC, CloudType);                \
+    makeCloudFunctionObjectSCType(ParticleTrapSC, CloudType);                  \
+    makeCloudFunctionObjectSCType(PatchCollisionDensitySC, CloudType);         \
+    makeCloudFunctionObjectSCType(PatchPostProcessingSC, CloudType);           \
+    makeCloudFunctionObjectSCType(RelativeVelocitySC, CloudType);              \
+    makeCloudFunctionObjectSCType(VoidFractionSC, CloudType);
 
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
