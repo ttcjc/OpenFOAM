@@ -45,6 +45,10 @@ Outputs an indicator of RAS and LES regions within a DES simulation:
 - '0' indicates RAS
 - '1' indicates LES
 
+##### forceCoeffsExtended
+
+Expands forceCoeff functionality to include outputs for all three force coefficients (lift, drag and side force) as well as all three moment coefficients (yaw, pitch and roll)
+
 ### lagrangian
 
 #### 'SC' (Surface Contamination) File Variants
@@ -52,6 +56,6 @@ Outputs an indicator of RAS and LES regions within a DES simulation:
 Variations of existing OpenFOAM files developed to support custom solver (pisoFoamSC) functionality without impacting native operation.
 
 Additional functionality includes:
-- Recording of Lagrangian data to separate file(s) as particles cross user-defined streamwise plane(s) of interest
-- Recording of impinging particles to separate file (reducing storage requirements)
 - Ability to record Lagrangian data at user-defined time interval (separate from Eulerian phase)
+- Ability to record Lagrangian data to separate file when particles impinge on a surface in a user-defined volume (and subsequent removal of particles from simulation)
+- Ability to record Lagrangian data to separate file(s) as particles cross user-defined streamwise plane(s) of interest (and subsequent removal of particles from simulation)
