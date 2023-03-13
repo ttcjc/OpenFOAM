@@ -1,0 +1,30 @@
+#!/bin/bash
+
+## Output
+echo "Removing Excess Single-Phase Data"
+
+## Set Write Interval
+writeInterval=$(grep "writeInterval" system/controlDict | grep -o "\([0-9.]*\)")
+
+## Calculate Times of Interest
+endTime=$(foamListTimes -latestTime)
+noWrites=$(bc <<< "($endTime - $writeInterval) / $writeInterval")
+
+## Remove Excess Single-Phase Data
+shopt -s extglob
+
+for (( i = 1; i <= $noWrites; i++ )); do
+    time=$(printf "%.7g" $(bc <<< "($i * $writeInterval)"))
+
+    if [[ -d "$time" ]]; then
+        echo "    Removing Single-Phase Data Associated With T = $time s"
+        rm -r $time/!("lagrangian"|"uniform")
+    fi
+
+done
+
+## Output
+echo
+echo "    Execution Time = ${SECONDS}s"
+echo "Excess Data Removal Complete"
+echo
