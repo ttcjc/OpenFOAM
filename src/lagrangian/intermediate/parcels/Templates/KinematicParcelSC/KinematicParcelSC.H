@@ -296,6 +296,9 @@ protected:
             // CJC {
                 //- Position in Cartesian coordinates [m]
                 vector positionCartesian_;
+
+                //- Slip Velocity of Parcel [m/s]
+                vector Uslip_;
             // } CJC
 
 
@@ -339,6 +342,7 @@ public:
           + " tTurb"
           + " (UTurbx UTurby UTurbz)"
           + " (positionCartesianx positionCartesiany positionCartesianz)" // CJC
+          + " (Uslipx Uslipy Uslipz)" // CJC
         );
 
 
@@ -466,6 +470,9 @@ public:
             // CJC {
                 //- Return const access to position in Cartesian coordinates
                 inline const vector& positionCartesian() const;
+
+                //- Return const access to slip velocity
+                inline const vector& Uslip() const;
             // } CJC
 
 
@@ -504,6 +511,9 @@ public:
             // CJC {
                 //- Return access to position in Cartesian coordinates
                 inline vector& positionCartesian();
+
+                //- Return access to slip velocity
+                inline vector& Uslip();
             // } CJC
 
 

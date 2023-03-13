@@ -63,7 +63,8 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(0.0),
     tTurb_(0.0),
     UTurb_(Zero),
-    positionCartesian_(Zero) // CJC
+    positionCartesian_(Zero), // CJC
+    Uslip_(Zero) // CJC
 {
     if (readFields)
     {
@@ -80,6 +81,7 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
             tTurb_ = readScalar(is);
             is >> UTurb_;
             is >> positionCartesian_; // CJC
+            is >> Uslip_; // CJC
         }
         else
         {
@@ -181,6 +183,13 @@ void Foam::KinematicParcelSC<ParcelType>::readFields(CloudType& c)
             write
         );
         c.checkFieldIOobject(c, positionCartesian);
+
+        IOField<vector> Uslip
+        (
+            c.fieldIOobject("Uslip", IOobject::MUST_READ),
+            write
+        );
+        c.checkFieldIOobject(c, Uslip);
     // } CJC
 
     label i = 0;
@@ -200,6 +209,7 @@ void Foam::KinematicParcelSC<ParcelType>::readFields(CloudType& c)
         p.tTurb_ = tTurb[i];
         p.UTurb_ = UTurb[i];
         p.positionCartesian_ = positionCartesian[i]; // CJC
+        p.Uslip_ = Uslip[i]; // CJC
 
         i++;
     }
@@ -225,6 +235,7 @@ void Foam::KinematicParcelSC<ParcelType>::writeFields(const CloudType& c)
     IOField<scalar> tTurb(c.fieldIOobject("tTurb", IOobject::NO_READ), np);
     IOField<vector> UTurb(c.fieldIOobject("UTurb", IOobject::NO_READ), np);
     IOField<vector> positionCartesian(c.fieldIOobject("positionCartesian", IOobject::NO_READ), np); // CJC
+    IOField<vector> Uslip(c.fieldIOobject("Uslip", IOobject::NO_READ), np); // CJC
 
     label i = 0;
 
@@ -243,6 +254,7 @@ void Foam::KinematicParcelSC<ParcelType>::writeFields(const CloudType& c)
         tTurb[i] = p.tTurb();
         UTurb[i] = p.UTurb();
         positionCartesian[i] = p.positionCartesian(); // CJC
+        Uslip[i] = p.Uslip(); // CJC
 
         i++;
     }
@@ -260,6 +272,7 @@ void Foam::KinematicParcelSC<ParcelType>::writeFields(const CloudType& c)
     tTurb.write(write);
     UTurb.write(write);
     positionCartesian.write(write); // CJC
+    Uslip.write(write); // CJC
 }
 
 
@@ -285,7 +298,8 @@ Foam::Ostream& Foam::operator<<
             << token::SPACE << p.age()
             << token::SPACE << p.tTurb()
             << token::SPACE << p.UTurb()
-            << token::SPACE << p.positionCartesian(); // CJC
+            << token::SPACE << p.positionCartesian() // CJC
+            << token::SPACE << p.Uslip(); // CJC
     }
     else
     {

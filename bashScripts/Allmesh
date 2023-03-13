@@ -10,7 +10,7 @@ checkMesh -writeSets vtk > log.checkMeshBlock
 # ## snappyHexMesh (Local)
 # surfaceFeatures > log.surfaceFeatures
 # decomposePar > log.decomposeParMesh
-# mpirun -np 6 snappyHexMesh -parallel > log.meshSnappy
+# mpirun -np 4 snappyHexMesh -parallel > log.meshSnappy
 # reconstructParMesh -mergeTol 1e-8 -latestTime > log.reconstructParMesh
 # checkMesh -latestTime -writeSets vtk > log.checkMeshSnappy
 

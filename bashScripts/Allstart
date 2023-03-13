@@ -11,8 +11,8 @@ decomposePar > log.decomposeParRun
 mpirun -np 256 renumberMesh -parallel -overwrite > log.renumberMesh
 
 # ## Initialise
-# mpirun -np 6 potentialFoam -parallel > log.potentialFoam
-# # mpirun -np 256 potentialFoam -parallel > log.potentialFoam
+# # mpirun -np 6 potentialFoam -parallel > log.potentialFoam
+# mpirun -np 256 potentialFoam -parallel > log.potentialFoam
 
 ## Output
 echo "    Execution Time = ${SECONDS}s"

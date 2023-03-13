@@ -7,7 +7,7 @@ echo "${PWD##*/} Reconstruction Initiated"
 # reconstructPar -latestTime > log.reconstructParRunLatest
 
 ## Reconstruct (Full Case)
-(foamListTimes; foamListTimes -processor) | sort -g | uniq -u | parallel -k -j 3 reconstructPar -newTimes -time {} > log.reconstructParRun
+(foamListTimes; foamListTimes -processor) | sort -g | uniq -u | parallel -k -j 4 reconstructPar -newTimes -time {} > log.reconstructParRun
 
 # ## Clean
 # rm -rf processor* > /dev/null 2>&1

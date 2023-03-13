@@ -494,7 +494,10 @@ void Foam::CloudSC<ParticleType>::storeGlobalPositions() const
                   << p.positionCartesian().z() << " "
                   << p.U().x() << " "
                   << p.U().y() << " "
-                  << p.U().z() << nl;
+                  << p.U().z() << " "
+                  << p.Uslip().x() << " "
+                  << p.Uslip().y() << " "
+                  << p.Uslip().z() << nl;
     }
 
 
@@ -523,7 +526,10 @@ void Foam::CloudSC<ParticleType>::storeGlobalPositions() const
                     << p.positionCartesian().z() << " "
                     << p.U().x() << " "
                     << p.U().y() << " "
-                    << p.U().z() << nl;
+                    << p.U().z() << " "
+                    << p.Uslip().x() << " "
+                    << p.Uslip().y() << " "
+                    << p.Uslip().z() << nl;
     }
 // } CJC
 

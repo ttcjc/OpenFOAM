@@ -90,7 +90,8 @@ inline Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(0.0),
     tTurb_(0.0),
     UTurb_(Zero),
-    positionCartesian_(Zero) // CJC
+    positionCartesian_(Zero), // CJC
+    Uslip_(Zero) // CJC
 {}
 
 
@@ -113,7 +114,8 @@ inline Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(0.0),
     tTurb_(0.0),
     UTurb_(Zero),
-    positionCartesian_(Zero) // CJC
+    positionCartesian_(Zero), // CJC
+    Uslip_(Zero) // CJC
 {}
 
 
@@ -144,7 +146,8 @@ inline Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(0.0),
     tTurb_(0.0),
     UTurb_(Zero),
-    positionCartesian_(Zero) // CJC
+    positionCartesian_(Zero), // CJC
+    Uslip_(U0) // CJC
 {}
 
 
@@ -261,11 +264,19 @@ inline const Foam::vector& Foam::KinematicParcelSC<ParcelType>::UTurb() const
     return UTurb_;
 }
 
+
 // CJC {
     template<class ParcelType>
     inline const Foam::vector& Foam::KinematicParcelSC<ParcelType>::positionCartesian() const
     {
         return positionCartesian_;
+    }
+
+
+    template<class ParcelType>
+    inline const Foam::vector& Foam::KinematicParcelSC<ParcelType>::Uslip() const
+    {
+        return Uslip_;
     }
 // } CJC
 
@@ -346,7 +357,15 @@ inline Foam::vector& Foam::KinematicParcelSC<ParcelType>::UTurb()
     {
         return positionCartesian_;
     }
+
+
+    template<class ParcelType>
+    inline Foam::vector& Foam::KinematicParcelSC<ParcelType>::Uslip()
+    {
+        return Uslip_;
+    }
 // } CJC
+
 
 template<class ParcelType>
 inline Foam::scalar Foam::KinematicParcelSC<ParcelType>::massCell

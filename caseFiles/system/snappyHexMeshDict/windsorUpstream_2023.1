@@ -1,0 +1,325 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Revision windsorUpstream_2023.1
+// Changelog: N/A
+// Notes: N/A
+
+
+// Meshing Process Switches
+castellatedMesh     true;
+snap                true;
+addLayers           true;
+
+// Geometry and Refinement Volumes
+geometry
+{
+    tunnelWorkingSectionWalls
+    {
+        type    triSurfaceMesh;
+        file    "Tunnel_Working_Section_Walls_wBuffer.stl";
+    }
+
+    windsorAxles
+    {
+        type    triSurfaceMesh;
+        file    "Windsor_Axles.stl";
+    }
+
+    windsorBody
+    {
+        type    triSurfaceMesh;
+        file    "Windsor_SB_wW.stl";
+    }
+
+    windsorWheels
+    {
+        type    triSurfaceMesh;
+        file    "Windsor_Wheels.stl";
+    }
+
+    refinementWheelsFL
+    {
+        type    searchableBox;
+        min     (-1.7 -0.2065 0);
+        max     (-1.5875 -0.1275 0.016);
+    }
+
+    refinementWheelsFR
+    {
+        type    searchableBox;
+        min     (-1.7 0.1275 0);
+        max     (-1.5875 0.2065 0.016);
+    }
+
+    refinementWheelsRL
+    {
+        type    searchableBox;
+        min     (-1.0625 -0.2065 0);
+        max     (-0.95 -0.1275 0.016);
+    }
+
+    refinementWheelsRR
+    {
+        type    searchableBox;
+        min     (-1.0625 0.1275 0);
+        max     (-0.95 0.2065 0.016);
+    }
+
+    refinementUnderbodyInnerA
+    {
+        type    searchableBox;
+        min     (-1.92575 -0.2345 0);
+        max     (-1.79175 0.2345 0.125);
+    }
+
+    refinementUnderbodyInnerB
+    {
+        type    searchableBox;
+        min     (-1.79175 -0.2345 0);
+        max     (-0.80175 0.2345 0.18);
+    }
+
+    refinementUnderbodyOuterA
+    {
+        type    searchableBox;
+        min     (-1.96575 -0.2745 0);
+        max     (-1.79175 0.2745 0.125);
+    }
+
+    refinementUnderbodyOuterB
+    {
+        type    searchableBox;
+        min     (-1.79175 -0.2745 0);
+        max     (-0.864 0.2745 0.18);
+    }
+
+    refinementNearWake
+    {
+        type    triSurfaceMesh;
+        file    "windsorRefinementNearWake.stl";
+    }
+
+    refinementFarWake
+    {
+        type    triSurfaceMesh;
+        file    "windsorRefinementFarWake.stl";
+    }
+
+    refinementFarField
+    {
+        type    triSurfaceMesh;
+        file    "windsorRefinementFarField.stl";
+    }
+}
+
+// Mesh Control
+castellatedMeshControls
+{
+    maxLocalCells               40000000;               // Per processor
+    maxGlobalCells              240000000;              // Prior to geometry removal
+    maxLoadUnbalance            0.1;                    // Fraction of perfect balance
+    minRefinementCells          0;                      // Cells refined per iteration
+    nCellsBetweenLevels         1;                      // Layers between levels
+    gapLevelIncrement           0;                      // Increase refinement level in small gaps
+    resolveFeatureAngle         30;                     // Max refinement above balue
+    allowFreeStandingZoneFaces  true;
+
+    locationInMesh              (-0.016 -0.016 0.660000001);
+
+    locationsOutsideMesh
+    (
+        (9.456 -0.016 0.660000001)      // Inlet
+        (9.681 -0.016 0.660000001)      // Outlet
+        (-0.016 -0.9941306 0.660000001) // Front
+        (-0.016 0.9941306 0.660000001)  // Back
+        (-0.016 -0.016 1.336)           // Roof
+        (-0.016 -0.016 -0.016)          // Floor
+    );
+
+    features // Edge refinement based on surfaceFeatures utility
+    (
+        {
+            file    "Windsor_Axles.eMesh";
+            level   5;
+        }
+
+        {
+            file    "Windsor_SB_wW.eMesh";
+            level   5;
+            // level   3;
+        }
+
+        {
+            file    "Windsor_Wheels.eMesh";
+            level   5;
+        }
+    );
+
+    refinementSurfaces // Surface refinement
+    {
+        "(windsor.*)"
+        {
+            level   (5 5); // Min and max level
+            // level   (3 3); // Min and max level
+        }
+    }
+
+    refinementRegions // Volumetric refinement
+    {
+        tunnelWorkingSectionWalls
+        {
+            mode    distance;
+            levels  ((0.048 2) (0.128 1));
+        }
+
+        "(windsor.*)"
+        {
+            mode    distance;
+            levels  ((0.012 5) (0.04 4) (0.08 3) (0.16 2) (0.32 1));
+            // levels  ((0.08 3) (0.16 2) (0.32 1));
+        }
+
+        "(refinementWheels.*)"
+        {
+            mode    inside;
+            levels  ((1 5)); // First entry ignored
+        }
+
+        "(refinementUnderbodyInner.*)"
+        {
+            mode    inside;
+            levels  ((1 4));
+        }
+
+        "(refinementUnderbodyOuter.*|refinementNearWake)"
+        {
+            mode    inside;
+            levels  ((1 3));
+        }
+
+        refinementFarWake
+        {
+            mode    inside;
+            levels  ((1 2));
+        }
+
+        refinementFarField
+        {
+            mode    inside;
+            levels  ((1 1));
+        }
+    }
+}
+
+// Geometry Snap Control
+snapControls
+{
+    tolerance                   4;      // Rel. dist for point to snap
+    implicitFeatureSnap         false;  // Use geometric features
+    explicitFeatureSnap         true;   // Use eMesh features
+    multiRegionFeatureSnap      false;  // Detects features between multiple faces
+    // nFaceSplitInterval          25;
+    // detectBaffles               true;
+    // releasePoints               false;
+    // stringFeatures              true;
+    // avoidDiagonal               false;
+    // concaveAngle                67.5;
+    // minAreaRatio                0.3;
+    // detectNearSurfacesSnap      true;
+    // baffleFeaturePoints         false;
+    // strictRegionSnap            true;
+
+    nSmoothPatch                5;      // Surface smoothing iterations
+    nSmoothInternal             5;      // Reduces surface non-orthogonality
+
+    nRelaxIter                  25;     // Improves snapping
+    nSolveIter                  25;     // Snapping iterations
+    nFeatureSnapIter            75;     // Improves edge features
+}
+
+// Prism Layer Control
+addLayersControls
+{
+    relativeSizes               true;   // Relative or absolute
+    expansionRatio              1;      // Overwritten by unique layer controls
+    firstLayerThickness         1;      // Overwritten by unique layer controls
+    minThickness                1;      // Overwritten by unique layer controls
+    nGrow                       0;      // Delays layer growth close to patches
+    nBufferCellsNoExtrude       0;      // Gradually step down layer count
+    featureAngle                315;    // Above which layers collapse
+    slipFeatureAngle            45;     // Above which layers slide onto patches
+    // mergePatchFacesAngle        0;      // Below whihch merge cell faces on the same patch
+    maxFaceThicknessRatio       5;      // Stop on warped cells
+    // concaveAngle                0;
+    // layerTerminationAngle       0;      // Above which do not extrude around sharp edges
+    minMedianAxisAngle          90;
+    maxThicknessToMedialRatio   0.625;  // Max value of layer height/medial distance
+
+    // nSmoothDisplacement         0;
+    nSmoothSurfaceNormals       5;
+    nSmoothThickness            5;
+    nSmoothNormals              5;
+
+    nLayerIter                  100;    // Layer iterations
+    nRelaxedIter                100;    // After which relaxed values used
+    nRelaxIter                  100;    // Relaxed iterations
+
+    layers
+    {
+        "(inletBuffer.*|workingSection.*|outletBuffer.*)"
+        {
+            firstLayerThickness     0.077628572741315;
+            minThickness            0.089272858652513;
+            expansionRatio          1.3;
+            nSurfaceLayers          9;
+        }
+
+        "(windsorAxles|windsorWheels)"
+        {
+            firstLayerThickness     0.482167624022812;
+            minThickness            0.554492767626233;
+            expansionRatio          1.3;
+            nSurfaceLayers          2;
+        }
+
+        windsorBody
+        {
+            firstLayerThickness     0.482167624022812;
+            minThickness            0.554492767626233;
+            expansionRatio          1.3;
+            nSurfaceLayers          3;
+        }
+    }
+}
+
+// Quality Control
+meshQualityControls
+{
+    #include "meshQualityDict"
+}
+
+mergeTolerance  1e-8;
+
+writeFlags
+(
+    scalarLevels
+    layerSets
+    layerFields
+);
+
+// ************************************************************************* //

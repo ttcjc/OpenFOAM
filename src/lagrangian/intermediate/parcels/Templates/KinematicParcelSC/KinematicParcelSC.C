@@ -138,6 +138,11 @@ void Foam::KinematicParcelSC<ParcelType>::calc
     this->U_ =
         calcVelocity(cloud, td, dt, Re, td.muc(), mass0, Su, dUTrans, Spu);
 
+    // CJC {
+            // Calculate slip velocity
+            this->Uslip_ = this->U_ - td.Uc();
+    // } CJC
+
 
     // Accumulate carrier phase source terms
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -247,7 +252,8 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(p.age_),
     tTurb_(p.tTurb_),
     UTurb_(p.UTurb_),
-    positionCartesian_(p.positionCartesian_) // CJC
+    positionCartesian_(p.positionCartesian_), // CJC
+    Uslip_(p.Uslip_) // CJC
 {}
 
 
@@ -269,7 +275,8 @@ Foam::KinematicParcelSC<ParcelType>::KinematicParcelSC
     age_(p.age_),
     tTurb_(p.tTurb_),
     UTurb_(p.UTurb_),
-    positionCartesian_(p.positionCartesian_) // CJC
+    positionCartesian_(p.positionCartesian_), // CJC
+    Uslip_(p.Uslip_) // CJC
 {}
 
 
