@@ -7,22 +7,22 @@
 -------------------------------------------------------------------------------
 
 Class
-	Foam::functionObjects::DESmodelRegions
+    Foam::functionObjects::DESmodelRegions
 
 Description
-	Brings DESModelRegions functionality from OpenFOAM v2.3 to OpenFOAM v7
-	based on wyldckat's own implementation for OpenFOAM v5 and OpenFOAM v6
+    Brings DESModelRegions functionality from OpenFOAM v2.3 to OpenFOAM v7
+    based on wyldckat's own implementation for OpenFOAM v5 and OpenFOAM v6
 
-	Outputs an indicator of RAS and LES regions within a DES simulation:
-	- '0' indicates RAS
-	- '1' indicates LES
+    Outputs an indicator of RAS and LES regions within a DES simulation:
+    - '0' indicates RAS
+    - '1' indicates LES
 
 See also
-	Foam::functionObjects::fieldExpression
-	Foam::functionObjects::fvMeshFunctionObject
+    Foam::functionObjects::fieldExpression
+    Foam::functionObjects::fvMeshFunctionObject
 
 SourceFiles
-	DESmodelRegions.C
+    DESmodelRegions.C
 
 \*---------------------------------------------------------------------------*/
 
@@ -48,40 +48,40 @@ class DESmodelRegions
 {
 public:
 
-	static const word& modelName();
+    static const word& modelName();
 
-	//- Runtime type information
-	TypeName("DESmodelRegions");
-
-
-	// Constructors
-
-		//- Construct from Time and dictionary
-		DESmodelRegions
-		(
-			const word& name,
-			const Time& runTime,
-			const dictionary& dict
-		);
+    //- Runtime type information
+    TypeName("DESmodelRegions");
 
 
-	//- Destructor
-	virtual ~DESmodelRegions();
+    // Constructors
+
+        //- Construct from Time and dictionary
+        DESmodelRegions
+        (
+            const word& name,
+            const Time& runTime,
+            const dictionary& dict
+        );
 
 
-	// Member Functions
-
-		//- Calculate DES field
-		virtual bool execute();
-
-		//- Write DES field
-		virtual bool write();
+    //- Destructor
+    virtual ~DESmodelRegions();
 
 
-	// Member Operators
+    // Member Functions
 
-		//- Disallow default bitwise assignment
-		void operator = (const DESmodelRegions&) = delete;
+        //- Calculate DES field
+        virtual bool execute();
+
+        //- Write DES field
+        virtual bool write();
+
+
+    // Member Operators
+
+        //- Disallow default bitwise assignment
+        void operator = (const DESmodelRegions&) = delete;
 };
 
 

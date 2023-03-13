@@ -1,12 +1,18 @@
 #!/bin/bash
 
+## Output
 echo "${PWD##*/} Reconstruction Initiated"
 
-## Reconstruction
-reconstructPar > log.reconstructParRun
+# ## Reconstruct (Latest Time)
+# reconstructPar -latestTime > log.reconstructParRunLatest
 
-## Clean-up
-rm -rf processor* > /dev/null 2>&1
+## Reconstruct (Full Case)
+(foamListTimes; foamListTimes -processor) | sort -g | uniq -u | parallel -k -j 4 reconstructPar -newTimes -time {} > log.reconstructParRun
+
+# ## Clean
+# rm -rf processor* > /dev/null 2>&1
 
 ## Output
+echo "    Execution Time = ${SECONDS}s"
 echo "${PWD##*/} Reconstruction Complete"
+echo

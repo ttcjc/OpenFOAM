@@ -1,0 +1,5 @@
+pisoFoamSC.C
+
+
+/* Application Definition */
+EXE = $(FOAM_USER_APPBIN)/pisoFoamSC

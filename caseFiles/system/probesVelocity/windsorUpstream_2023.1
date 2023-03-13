@@ -1,0 +1,49 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+// Revision windsorUpstream_2023.1
+// Changelog: N/A
+// Notes: N/A
+
+
+probesVelocity
+{
+    type                sets;
+    libs                ("libsampling.so");
+    executeControl      runTime;
+    executeInterval     0.0025;
+    writeControl        runTime;
+    writeInterval       0.0025;
+    timeStart           1;
+    // timeEnd             0;
+    enabled             true;
+
+    interpolationScheme     cellPoint;
+    setFormat               raw;
+
+    fields
+    (
+        U
+    );
+
+    sets
+    (
+        wake
+        {
+            type        points;
+            axis        xyz;
+            ordered     false;
+
+            points
+            (
+            );
+        }
+    );
+}
+
+// ************************************************************************* //

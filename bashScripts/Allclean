@@ -1,9 +1,10 @@
 #!/bin/bash
 
-clear
+## Output
+echo "${PWD##*/} Cleaning Initiated"
 
-## Call Cleaning Functions
-. $WM_PROJECT_DIR/bin/tools/CleanFunctions
+## Source Cleaning Functions
+source ${WM_PROJECT_USER_DIR}/bin/tools/CleanFunctions
 
 ## Clean
 cleanCase
@@ -12,4 +13,10 @@ rm -rf constant/triSurface/*.eMesh > /dev/null 2>&1
 rm -rf *.err > /dev/null 2>&1
 rm -rf *.out > /dev/null 2>&1
 rm -rf 0/cell* > /dev/null 2>&1
-sed -i 9q extractionData/extractionData
+rm -rf LagrangianExtractionPlane/* > /dev/null 2>&1
+rm -rf LagrangianSurfaceContamination/* > /dev/null 2>&1
+
+## Output
+echo "    Execution Time = ${SECONDS}s"
+echo "${PWD##*/} Cleaning Complete"
+echo

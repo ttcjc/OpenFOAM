@@ -2,5 +2,6 @@
 
 clear
 
-wclean all ..
+wclean all applications
+wclean all src
 rm -rf platforms > /dev/null 2>&1

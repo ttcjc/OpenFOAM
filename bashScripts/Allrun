@@ -1,29 +1,17 @@
 #!/bin/bash
 
+## Output
 echo "${PWD##*/} Case Initiated"
 
-## Decomposition
-decomposePar > log.decomposeParRun
-
-## Optimisation
-# mpirun -np 6 renumberMesh -parallel -overwrite > log.renumberMesh
-mpirun -np 560 renumberMesh -parallel -overwrite > log.renumberMesh
-
-## Initialisation
-# mpirun -np 6 potentialFoam -parallel > log.potentialFoam
-# mpirun -np 560 potentialFoam -parallel > log.potentialFoam
-
-## Run (pisoFoam)
+## Run (Single-Phase)
 # mpirun -np 6 pisoFoam -parallel > log.pisoFoam
-# mpirun -np 6 pisoFoamL -parallel > log.pisoFoamL
-mpirun -np 560 pisoFoam -parallel > log.pisoFoam
-# mpirun -np 560 pisoFoamL -parallel > log.pisoFoamL
+mpirun -np 256 pisoFoam -parallel > log.pisoFoam
 
-## Run (pimpleFoam)
-# mpirun -np 6 pimpleFoam -parallel > log.pimpleFoam
-# mpirun -np 6 pimpleFoamL -parallel > log.pimpleFoamL
-# mpirun -np 560 pimpleFoam -parallel > log.pimpleFoam
-# mpirun -np 560 pimpleFoamL -parallel > log.pimpleFoamL
+# ## Run (Multi-Phase)
+# # mpirun -np 6 pisoFoamSC -parallel > log.pisoFoamSC
+# mpirun -np 256 pisoFoamSC -parallel > log.pisoFoamSC
 
 ## Output
+echo "    Execution Time = ${SECONDS}s"
 echo "${PWD##*/} Case Complete"
+echo
