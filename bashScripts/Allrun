@@ -4,11 +4,11 @@
 echo "${PWD##*/} Case Initiated"
 
 ## Run (Single-Phase)
-# mpirun -np 6 pisoFoam -parallel > log.pisoFoam
+# mpirun -np 4 pisoFoam -parallel > log.pisoFoam
 mpirun -np 256 pisoFoam -parallel > log.pisoFoam
 
 # ## Run (Multi-Phase)
-# # mpirun -np 6 pisoFoamSC -parallel > log.pisoFoamSC
+# # mpirun -np 4 pisoFoamSC -parallel > log.pisoFoamSC
 # mpirun -np 256 pisoFoamSC -parallel > log.pisoFoamSC
 
 ## Output

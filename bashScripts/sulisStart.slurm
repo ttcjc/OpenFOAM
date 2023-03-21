@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=start
+#SBATCH --job-name=srt
 #SBATCH --output=start.out
 #SBATCH --error=start.err
 #SBATCH --time=6:00:00

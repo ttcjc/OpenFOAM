@@ -23,29 +23,66 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "basicKinematicCloudSC.H"
-
-#include "makeParcelCloudFunctionObjectsSC.H"
-
-// Kinematic
-#include "makeParcelForces.H"
-#include "makeParcelDispersionModels.H"
-#include "makeParcelInjectionModelsSC.H"
-#include "makeParcelPatchInteractionModels.H"
-#include "makeParcelStochasticCollisionModels.H"
-#include "makeParcelSurfaceFilmModels.H"
+#include "kinematicParcelInjectionSCData.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-makeParcelCloudFunctionObjectsSC(basicKinematicCloudSC);
+Foam::kinematicParcelInjectionSCData::kinematicParcelInjectionSCData(Istream& is)
+{
+    is.check("reading (Px Py Pz)");
+    is >> x_;
 
-// Kinematic sub-models
-makeParcelForces(basicKinematicCloudSC);
-makeParcelDispersionModels(basicKinematicCloudSC);
-makeParcelInjectionModelsSC(basicKinematicCloudSC);
-makeParcelPatchInteractionModels(basicKinematicCloudSC);
-makeParcelStochasticCollisionModels(basicKinematicCloudSC);
-makeParcelSurfaceFilmModels(basicKinematicCloudSC);
+    is.check("reading (Ux Uy Uz)");
+    is >> U_;
+
+    is.check("reading d");
+    is >> d_;
+
+    is.check("reading rho");
+    is >> rho_;
+
+    is.check("reading mDot");
+    is >> mDot_;
+
+    is.check("kinematicParcelInjectionSCData(Istream& is)");
+}
+
+
+// * * * * * * * * * * * * * * * IOstream Operators  * * * * * * * * * * * * //
+
+Foam::Ostream& Foam::operator<<
+(
+    Ostream& os,
+    const kinematicParcelInjectionSCData& data
+)
+{
+    os << data.x_ << data.U_ << data.d_ << data.rho_ << data.mDot_;
+
+    return os;
+}
+
+
+Foam::Istream& Foam::operator>>(Istream& is, kinematicParcelInjectionSCData& data)
+{
+    is.check("reading (Px Py Pz)");
+    is >> data.x_;
+
+    is.check("reading (Ux Uy Uz)");
+    is >> data.U_;
+
+    is.check("reading d");
+    is >> data.d_;
+
+    is.check("reading rho");
+    is >> data.rho_;
+
+    is.check("reading mDot");
+    is >> data.mDot_;
+
+    is.check("operator(Istream&, kinematicParcelInjectionSCData&)");
+
+    return is;
+}
 
 
 // ************************************************************************* //

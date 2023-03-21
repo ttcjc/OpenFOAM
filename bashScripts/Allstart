@@ -7,11 +7,11 @@ echo "${PWD##*/} Case Initialising"
 decomposePar > log.decomposeParRun
 
 ## Optimise
-# mpirun -np 6 renumberMesh -parallel -overwrite > log.renumberMesh
+# mpirun -np 4 renumberMesh -parallel -overwrite > log.renumberMesh
 mpirun -np 256 renumberMesh -parallel -overwrite > log.renumberMesh
 
 # ## Initialise
-# # mpirun -np 6 potentialFoam -parallel > log.potentialFoam
+# # mpirun -np 4 potentialFoam -parallel > log.potentialFoam
 # mpirun -np 256 potentialFoam -parallel > log.potentialFoam
 
 ## Output

@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Copyright (C) 2011-2018 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2020 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -23,29 +23,18 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "basicKinematicCloudSC.H"
-
-#include "makeParcelCloudFunctionObjectsSC.H"
-
-// Kinematic
-#include "makeParcelForces.H"
-#include "makeParcelDispersionModels.H"
-#include "makeParcelInjectionModelsSC.H"
-#include "makeParcelPatchInteractionModels.H"
-#include "makeParcelStochasticCollisionModels.H"
-#include "makeParcelSurfaceFilmModels.H"
+#include "kinematicParcelInjectionSCDataIOList.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-makeParcelCloudFunctionObjectsSC(basicKinematicCloudSC);
-
-// Kinematic sub-models
-makeParcelForces(basicKinematicCloudSC);
-makeParcelDispersionModels(basicKinematicCloudSC);
-makeParcelInjectionModelsSC(basicKinematicCloudSC);
-makeParcelPatchInteractionModels(basicKinematicCloudSC);
-makeParcelStochasticCollisionModels(basicKinematicCloudSC);
-makeParcelSurfaceFilmModels(basicKinematicCloudSC);
+namespace Foam
+{
+    defineTemplateTypeNameAndDebug
+    (
+        GlobalIOList<kinematicParcelInjectionSCData>,
+        0
+    );
+}
 
 
 // ************************************************************************* //

@@ -1,0 +1,27 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+// Revision windsorFullScale_2023.1
+// Changelog: N/A
+// Notes: N/A
+
+
+CourantNo
+{
+    type                CourantNo;
+    libs                ("libfieldFunctionObjects.so");
+    executeControl      timeStep;
+    executeInterval     1;
+    writeControl        none;
+    writeInterval       1;
+    timeStart           8;
+    // timeEnd             0;
+    enabled             true;
+}
+
+// ************************************************************************* //

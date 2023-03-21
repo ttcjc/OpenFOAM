@@ -23,29 +23,43 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "basicKinematicCloudSC.H"
+#include "kinematicParcelInjectionSCData.H"
 
-#include "makeParcelCloudFunctionObjectsSC.H"
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-// Kinematic
-#include "makeParcelForces.H"
-#include "makeParcelDispersionModels.H"
-#include "makeParcelInjectionModelsSC.H"
-#include "makeParcelPatchInteractionModels.H"
-#include "makeParcelStochasticCollisionModels.H"
-#include "makeParcelSurfaceFilmModels.H"
+namespace Foam
+{
+    defineTypeNameAndDebug(kinematicParcelInjectionSCData, 0);
+}
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
-makeParcelCloudFunctionObjectsSC(basicKinematicCloudSC);
+Foam::kinematicParcelInjectionSCData::kinematicParcelInjectionSCData()
+:
+    x_(point::zero),
+    U_(Zero),
+    d_(0.0),
+    rho_(0.0),
+    mDot_(0.0)
+{}
 
-// Kinematic sub-models
-makeParcelForces(basicKinematicCloudSC);
-makeParcelDispersionModels(basicKinematicCloudSC);
-makeParcelInjectionModelsSC(basicKinematicCloudSC);
-makeParcelPatchInteractionModels(basicKinematicCloudSC);
-makeParcelStochasticCollisionModels(basicKinematicCloudSC);
-makeParcelSurfaceFilmModels(basicKinematicCloudSC);
+
+Foam::kinematicParcelInjectionSCData::kinematicParcelInjectionSCData
+(
+    const dictionary& dict
+)
+:
+    x_(dict.lookup("x")),
+    U_(dict.lookup("U")),
+    d_(readScalar(dict.lookup("d"))),
+    rho_(readScalar(dict.lookup("rho"))),
+    mDot_(readScalar(dict.lookup("mDot")))
+{}
+
+// * * * * * * * * * * * * * * * * Destructor  * * * * * * * * * * * * * * * //
+
+Foam::kinematicParcelInjectionSCData::~kinematicParcelInjectionSCData()
+{}
 
 
 // ************************************************************************* //

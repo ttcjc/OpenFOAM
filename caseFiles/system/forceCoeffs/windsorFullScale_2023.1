@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+// Revision windsorFullScale_2023.1
+// Changelog: N/A
+// Notes: N/A
+
+
+forceCoeffs
+{
+    type                forceCoeffsExtended;
+    libs                ("libforcesExtended.so");
+    executeControl      timeStep;
+    executeInterval     1;
+    writeControl        timeStep;
+    writeInterval       1;
+    // timeStart           0;
+    // timeEnd             0;
+    enabled             true;
+
+    patches             ("windsor.*");
+    log                 false;
+    liftDir             (0 0 1);
+    dragDir             (1 0 0);
+    sideDir             (0 1 0);
+    pitchAxis           (0 1 0);
+    yawAxis             (0 0 1);
+    rollAxis            (1 0 0);
+    CofR                (0 0 0);
+    rho                 rhoInf;
+    rhoInf              1.269;
+    magUInf             22.222222222222222;
+    lRef                4.176;
+    Aref                1.878816;
+}
+
+// ************************************************************************* //

@@ -23,29 +23,50 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "basicKinematicCloudSC.H"
-
-#include "makeParcelCloudFunctionObjectsSC.H"
-
-// Kinematic
-#include "makeParcelForces.H"
-#include "makeParcelDispersionModels.H"
-#include "makeParcelInjectionModelsSC.H"
-#include "makeParcelPatchInteractionModels.H"
-#include "makeParcelStochasticCollisionModels.H"
-#include "makeParcelSurfaceFilmModels.H"
+#include "InjectionModelSC.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-makeParcelCloudFunctionObjectsSC(basicKinematicCloudSC);
+template<class CloudType>
+Foam::scalar Foam::InjectionModelSC<CloudType>::timeStart() const
+{
+    return SOI_;
+}
 
-// Kinematic sub-models
-makeParcelForces(basicKinematicCloudSC);
-makeParcelDispersionModels(basicKinematicCloudSC);
-makeParcelInjectionModelsSC(basicKinematicCloudSC);
-makeParcelPatchInteractionModels(basicKinematicCloudSC);
-makeParcelStochasticCollisionModels(basicKinematicCloudSC);
-makeParcelSurfaceFilmModels(basicKinematicCloudSC);
+
+template<class CloudType>
+Foam::scalar Foam::InjectionModelSC<CloudType>::volumeTotal() const
+{
+    return volumeTotal_;
+}
+
+
+template<class CloudType>
+Foam::scalar Foam::InjectionModelSC<CloudType>::massTotal() const
+{
+    return massTotal_;
+}
+
+
+template<class CloudType>
+Foam::scalar Foam::InjectionModelSC<CloudType>::massInjected() const
+{
+    return massInjected_;
+}
+
+
+template<class CloudType>
+Foam::label Foam::InjectionModelSC<CloudType>::nInjections() const
+{
+    return nInjections_;
+}
+
+
+template<class CloudType>
+Foam::label Foam::InjectionModelSC<CloudType>::parcelsAddedTotal() const
+{
+    return parcelsAddedTotal_;
+}
 
 
 // ************************************************************************* //

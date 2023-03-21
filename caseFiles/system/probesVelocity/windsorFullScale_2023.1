@@ -6,20 +6,20 @@
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 
-// Revision windsorUpstream_2023.1
+// Revision windsorFullScale_2023.1
 // Changelog: N/A
 // Notes: N/A
 
 
-probesPressure
+probesVelocity
 {
     type                sets;
     libs                ("libsampling.so");
     executeControl      runTime;
-    executeInterval     0.0025;
+    executeInterval     0.02;
     writeControl        runTime;
-    writeInterval       0.0025;
-    timeStart           1;
+    writeInterval       0.02;
+    timeStart           8;
     // timeEnd             0;
     enabled             true;
 
@@ -28,12 +28,12 @@ probesPressure
 
     fields
     (
-        p
+        U
     );
 
     sets
     (
-        base
+        underbody
         {
             type        points;
             axis        xyz;
@@ -41,7 +41,17 @@ probesPressure
 
             points
             (
-                (-3.325 -0.66 1.2)
+            );
+        }
+
+        wake
+        {
+            type        points;
+            axis        xyz;
+            ordered     false;
+
+            points
+            (
             );
         }
     );

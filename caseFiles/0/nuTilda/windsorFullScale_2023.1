@@ -1,0 +1,70 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      nuTilda;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Revision windsorFullScale_2023.1
+// Changelog: N/A
+// Notes: N/A
+
+
+dimensions      [0 2 -1 0 0 0 0]; // kg m s K mol A cd
+
+internalField   uniform 0.054624709926173;
+
+boundaryField
+{
+    inlet
+    {
+        type        fixedValue;
+        value       uniform 0.054624709926173;
+    }
+
+    outlet
+    {
+        type        zeroGradient;
+    }
+
+    "(domainBack|domainFront|domainRoof)"
+    {
+        type        symmetryPlane;
+    }
+
+    domainFloor
+    {
+        type        fixedValue;
+        value       uniform 0;
+    }
+
+    windsorBody
+    {
+        type        fixedValue;
+        value       uniform 0;
+    }
+
+    "(windsorAxles.*)"
+    {
+        type        fixedValue;
+        value       uniform 0;
+    }
+
+    "(windsorWheels.*)"
+    {
+        type        fixedValue;
+        value       uniform 0;
+    }
+}
+
+// ************************************************************************* //

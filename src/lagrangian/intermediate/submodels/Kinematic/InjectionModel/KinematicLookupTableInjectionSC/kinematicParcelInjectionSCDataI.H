@@ -23,29 +23,68 @@ License
 
 \*---------------------------------------------------------------------------*/
 
-#include "basicKinematicCloudSC.H"
-
-#include "makeParcelCloudFunctionObjectsSC.H"
-
-// Kinematic
-#include "makeParcelForces.H"
-#include "makeParcelDispersionModels.H"
-#include "makeParcelInjectionModelsSC.H"
-#include "makeParcelPatchInteractionModels.H"
-#include "makeParcelStochasticCollisionModels.H"
-#include "makeParcelSurfaceFilmModels.H"
+#include "kinematicParcelInjectionSCData.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-makeParcelCloudFunctionObjectsSC(basicKinematicCloudSC);
+inline const Foam::point& Foam::kinematicParcelInjectionSCData::x() const
+{
+    return x_;
+}
 
-// Kinematic sub-models
-makeParcelForces(basicKinematicCloudSC);
-makeParcelDispersionModels(basicKinematicCloudSC);
-makeParcelInjectionModelsSC(basicKinematicCloudSC);
-makeParcelPatchInteractionModels(basicKinematicCloudSC);
-makeParcelStochasticCollisionModels(basicKinematicCloudSC);
-makeParcelSurfaceFilmModels(basicKinematicCloudSC);
+
+inline const Foam::vector& Foam::kinematicParcelInjectionSCData::U() const
+{
+    return U_;
+}
+
+
+inline Foam::scalar Foam::kinematicParcelInjectionSCData::d() const
+{
+    return d_;
+}
+
+
+inline Foam::scalar Foam::kinematicParcelInjectionSCData::rho() const
+{
+    return rho_;
+}
+
+
+inline Foam::scalar Foam::kinematicParcelInjectionSCData::mDot() const
+{
+    return mDot_;
+}
+
+
+inline Foam::point& Foam::kinematicParcelInjectionSCData::x()
+{
+    return x_;
+}
+
+
+inline Foam::vector& Foam::kinematicParcelInjectionSCData::U()
+{
+    return U_;
+}
+
+
+inline Foam::scalar& Foam::kinematicParcelInjectionSCData::d()
+{
+    return d_;
+}
+
+
+inline Foam::scalar& Foam::kinematicParcelInjectionSCData::rho()
+{
+    return rho_;
+}
+
+
+inline Foam::scalar& Foam::kinematicParcelInjectionSCData::mDot()
+{
+    return mDot_;
+}
 
 
 // ************************************************************************* //

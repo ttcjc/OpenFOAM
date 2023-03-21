@@ -28,7 +28,7 @@ License
 #include "interpolation.H"
 #include "subCycleTime.H"
 
-#include "InjectionModelList.H"
+#include "InjectionModelSCList.H"
 #include "DispersionModel.H"
 #include "PatchInteractionModel.H"
 #include "StochasticCollisionModel.H"

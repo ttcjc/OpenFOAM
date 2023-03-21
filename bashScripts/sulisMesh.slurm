@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=mesh
+#SBATCH --job-name=msh
 #SBATCH --output=mesh.out
 #SBATCH --error=mesh.err
 #SBATCH --time=6:00:00
