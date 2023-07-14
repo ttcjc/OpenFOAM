@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Output
+## Initialise
 echo "Removing Excess Single-Phase Data"
 
 ## Set Write Interval
@@ -23,8 +23,9 @@ for (( i = 1; i <= $noWrites; i++ )); do
 
 done
 
-## Output
+## Complete
 echo
 echo "    Execution Time = ${SECONDS}s"
+echo
 echo "Excess Data Removal Complete"
 echo

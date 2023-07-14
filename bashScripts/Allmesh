@@ -1,25 +1,25 @@
 #!/bin/bash
 
-## Output
+## Initialise
 echo "${PWD##*/} Meshing Initiated"
 
 ## blockMesh
 blockMesh > log.meshBlock
 checkMesh -writeSets vtk > log.checkMeshBlock
 
-# ## snappyHexMesh (Local)
-# surfaceFeatures > log.surfaceFeatures
-# decomposePar > log.decomposeParMesh
-# mpirun -np 4 snappyHexMesh -parallel > log.meshSnappy
-# reconstructParMesh -mergeTol 1e-8 -latestTime > log.reconstructParMesh
-# checkMesh -latestTime -writeSets vtk > log.checkMeshSnappy
-
-## snappyHexMesh (Sulis)
+## snappyHexMesh (Local)
 surfaceFeatures > log.surfaceFeatures
 decomposePar > log.decomposeParMesh
-mpirun -np 256 snappyHexMesh -parallel > log.meshSnappy
+mpirun -np 4 snappyHexMesh -parallel > log.meshSnappy
 reconstructParMesh -mergeTol 1e-8 -latestTime > log.reconstructParMesh
 checkMesh -latestTime -writeSets vtk > log.checkMeshSnappy
+
+# ## snappyHexMesh (Sulis)
+# surfaceFeatures > log.surfaceFeatures
+# decomposePar > log.decomposeParMesh
+# mpirun -np 256 snappyHexMesh -parallel > log.meshSnappy
+# reconstructParMesh -mergeTol 1e-8 -latestTime > log.reconstructParMesh
+# checkMesh -latestTime -writeSets vtk > log.checkMeshSnappy
 
 ## Clean
 rm -rf constant/polyMesh > /dev/null 2>&1
@@ -27,7 +27,9 @@ cp -r $(foamListTimes -latestTime)/polyMesh constant
 rm -rf $(foamListTimes -latestTime) > /dev/null 2>&1
 rm -rf processor* > /dev/null 2>&1
 
-## Output
+## Complete
+echo
 echo "    Execution Time = ${SECONDS}s"
+echo
 echo "${PWD##*/} Meshing Complete"
 echo

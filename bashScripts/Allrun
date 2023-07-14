@@ -1,17 +1,19 @@
 #!/bin/bash
 
-## Output
+## Initialise
 echo "${PWD##*/} Case Initiated"
 
 ## Run (Single-Phase)
-# mpirun -np 4 pisoFoam -parallel > log.pisoFoam
-mpirun -np 256 pisoFoam -parallel > log.pisoFoam
+mpirun -np 4 pisoFoam -parallel > log.pisoFoam
+# mpirun -np 256 pisoFoam -parallel > log.pisoFoam
 
 # ## Run (Multi-Phase)
-# # mpirun -np 4 pisoFoamSC -parallel > log.pisoFoamSC
-# mpirun -np 256 pisoFoamSC -parallel > log.pisoFoamSC
+# mpirun -np 4 pisoFoamSC -parallel > log.pisoFoamSC
+# # mpirun -np 256 pisoFoamSC -parallel > log.pisoFoamSC
 
-## Output
+## Complete
+echo
 echo "    Execution Time = ${SECONDS}s"
+echo
 echo "${PWD##*/} Case Complete"
 echo

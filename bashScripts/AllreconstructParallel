@@ -1,0 +1,90 @@
+#!/bin/bash
+
+#### Functions
+
+## Check if a directory exists
+directory_exists() {
+    if [[ -d "$1" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+## Check if directory name is within the specified range
+is_within_range() {
+    local dirName="$1"
+    local minTime="$2"
+    local maxTime="$3"
+
+    if [[ "$dirName" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+
+        if [[ $(bc <<< "$dirName >= $minTime") && $(bc <<< "$dirName <= $maxTime") ]]; then
+            return 0
+        fi
+
+    fi
+
+    return 1
+}
+
+#### Script
+
+## Specify range of directories to reconstruct
+procDir="processor0"
+minTime=0
+maxTime=0
+
+## Initialise
+echo "${PWD##*/} Reconstruction Initiated"
+echo
+
+# Check if the processor directory exists
+if ! directory_exists "$procDir"; then
+    echo "    Specified Processor Directory Does Not Exist -> $procDir"
+    echo
+    echo "    Execution Time = ${SECONDS}s"
+    echo
+    echo "${PWD##*/} Reconstruction Failed"
+    echo
+    exit
+fi
+
+## Iterate over sub-directories and store the time directories within specified range
+dirsToReconstruct=""
+
+for dirPath in "$procDir"/*; do
+    dirName=$(basename "$dirPath")
+
+    if is_within_range "$dirName" "$minTime" "$maxTime"; then
+
+        if ! directory_exists "$dirName"; then
+            dirsToReconstruct+="$dirName\n"
+        fi
+
+    fi
+
+done
+
+## Remove trailing new line character
+dirsToReconstruct=$(echo -e "$dirsToReconstruct" | sed '$ d')
+
+## Perform parallel reconstruction
+if [ -z "$dirsToReconstruct" ]; then
+    echo "No Reconstruction Necessary"
+else
+    echo "    Reconstructing the Following Time Directories:"
+
+    while IFS= read -r line; do
+        echo "        ${line}"
+    done <<< "$dirsToReconstruct"
+
+    echo "$dirsToReconstruct" | sort -g | uniq -u | parallel -k -j 4 reconstructPar -newTimes -time {} > log.reconstructParRun
+fi
+
+## Complete
+echo
+echo "    Execution Time = ${SECONDS}s"
+echo
+echo "${PWD##*/} Reconstruction Complete"
+echo
