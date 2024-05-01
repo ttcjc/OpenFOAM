@@ -1,7 +1,7 @@
 # Ignore Directories
-platforms/
-results/
-run/
-.vscode/
+platforms
+results
+run
+.vscode
 
 # Ignore Files
