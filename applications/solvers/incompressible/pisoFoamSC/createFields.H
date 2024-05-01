@@ -74,13 +74,6 @@ autoPtr<incompressible::turbulenceModel> turbulence
         transportProperties.lookup("rhoInf")
     );
 
-    // Store reciprocal of carrier fluid density (used for two-wap coupling)
-    dimensionedScalar rhoInverseValue
-    (
-        "rhoInverseValue",
-        (1 / rhoValue)
-    );
-
     // Create volScalarField of carrier fluid density
     volScalarField rho
     (
@@ -107,7 +100,7 @@ autoPtr<incompressible::turbulenceModel> turbulence
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        laminarTransport.nu()*rhoValue
+        laminarTransport.nu() * rhoValue
     );
 
     // Allow Lagrangian particles to be influenced by gravity

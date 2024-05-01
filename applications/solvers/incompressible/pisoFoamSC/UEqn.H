@@ -17,7 +17,7 @@ MRF.correctBoundaryVelocity(U);
       + turbulence->divDevReff(U)
      ==
         fvOptions(U)
-      + rhoInverseValue*kinematicCloud.SU(U) // Expansion for two-way coupling
+      + (1 / rhoValue) * kinematicCloud.SU(U) // Source term for two-way coupling
     );
 // } CJC
 
