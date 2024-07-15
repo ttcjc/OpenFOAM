@@ -1,10 +1,17 @@
-/* clouds > Templates */
+/* clouds */
 clouds/Templates/KinematicCloudSC/cloudSolutionSC/cloudSolutionSC.C
 
 
-/* parcels > derived */
+/* parcels */
 parcels/derived/basicKinematicParcelSC/defineBasicKinematicParcelSC.C
 parcels/derived/basicKinematicParcelSC/makeBasicKinematicParcelSCSubmodels.C
+
+
+/* submodels */
+submodels/Kinematic/InjectionModel/KinematicLookupTableInjectionSC/kinematicParcelInjectionSCData.C
+submodels/Kinematic/InjectionModel/KinematicLookupTableInjectionSC/kinematicParcelInjectionSCDataIO.C
+submodels/Kinematic/InjectionModel/KinematicLookupTableInjectionSC/kinematicParcelInjectionSCDataIOList.C
+submodels/Kinematic/InjectionModel/PatchInjectionSC/patchInjectionSCBase.C
 
 
 /* Library Definition */

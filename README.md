@@ -59,3 +59,9 @@ Additional functionality includes:
 - Ability to record Lagrangian data at user-defined time interval (separate from Eulerian phase)
 - Ability to record Lagrangian data to separate file when particles impinge on a surface in a user-defined volume (and subsequent removal of particles from simulation)
 - Ability to record Lagrangian data to separate file(s) as particles cross user-defined streamwise plane(s) of interest (and subsequent removal of particles from simulation)
+
+##### WheelInjectionSC
+
+A custom injector that introduces particles randomly about a user-defined cylinder representing a wheel.
+
+Two injection methods are available, intended to produce injection patterns representative of both tread pickup and capillary action, as defined by Weir et al. in "Reduction of Adverse Aerodynamic Effects of Large Trucks"

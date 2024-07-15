@@ -1,0 +1,14 @@
+#!/bin/bash
+
+## Initialise
+echo "${PWD##*/} Reconstruction Initiated"
+
+## Reconstruct (Latest Time)
+reconstructPar -latestTime > log.reconstructParRunLatest
+
+## Complete
+echo
+echo "    Execution Time = ${SECONDS}s"
+echo
+echo "${PWD##*/} Reconstruction Complete"
+echo

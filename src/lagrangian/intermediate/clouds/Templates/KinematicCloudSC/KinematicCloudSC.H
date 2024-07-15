@@ -75,7 +75,7 @@ namespace Foam
 class integrationScheme;
 
 template<class CloudType>
-class InjectionModelList;
+class InjectionModelSCList;
 
 template<class CloudType>
 class DispersionModel;
@@ -192,7 +192,7 @@ protected:
         // References to the cloud sub-models
 
             //- Injector models
-            InjectionModelList<KinematicCloudSC<CloudType>> injectors_;
+            InjectionModelSCList<KinematicCloudSC<CloudType>> injectors_;
 
             //- Dispersion model
             autoPtr<DispersionModel<KinematicCloudSC<CloudType>>>
@@ -411,11 +411,11 @@ public:
             // Sub-models
 
                 //- Return const access to the injection model
-                inline const InjectionModelList<KinematicCloudSC<CloudType>>&
+                inline const InjectionModelSCList<KinematicCloudSC<CloudType>>&
                     injectors() const;
 
                 //- Return reference to the injection model
-                inline InjectionModelList<KinematicCloudSC<CloudType>>&
+                inline InjectionModelSCList<KinematicCloudSC<CloudType>>&
                     injectors();
 
                 //- Return const-access to the dispersion model

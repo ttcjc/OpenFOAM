@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Output
+## Initialise
 echo "${PWD##*/} Cleaning Initiated"
 
 ## Source Cleaning Functions
@@ -16,7 +16,9 @@ rm -rf 0/cell* > /dev/null 2>&1
 rm -rf LagrangianExtractionPlane/* > /dev/null 2>&1
 rm -rf LagrangianSurfaceContamination/* > /dev/null 2>&1
 
-## Output
+## Complete
+echo
 echo "    Execution Time = ${SECONDS}s"
+echo
 echo "${PWD##*/} Cleaning Complete"
 echo

@@ -30,7 +30,7 @@ License
 // Kinematic
 #include "makeParcelForces.H"
 #include "makeParcelDispersionModels.H"
-#include "makeParcelInjectionModels.H"
+#include "makeParcelInjectionModelsSC.H"
 #include "makeParcelPatchInteractionModels.H"
 #include "makeParcelStochasticCollisionModels.H"
 #include "makeParcelSurfaceFilmModels.H"
@@ -42,7 +42,7 @@ makeParcelCloudFunctionObjectsSC(basicKinematicCloudSC);
 // Kinematic sub-models
 makeParcelForces(basicKinematicCloudSC);
 makeParcelDispersionModels(basicKinematicCloudSC);
-makeParcelInjectionModels(basicKinematicCloudSC);
+makeParcelInjectionModelsSC(basicKinematicCloudSC);
 makeParcelPatchInteractionModels(basicKinematicCloudSC);
 makeParcelStochasticCollisionModels(basicKinematicCloudSC);
 makeParcelSurfaceFilmModels(basicKinematicCloudSC);

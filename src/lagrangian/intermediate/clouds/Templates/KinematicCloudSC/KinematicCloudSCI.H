@@ -173,7 +173,7 @@ Foam::KinematicCloudSC<CloudType>::functions()
 
 
 template<class CloudType>
-inline const Foam::InjectionModelList<Foam::KinematicCloudSC<CloudType>>&
+inline const Foam::InjectionModelSCList<Foam::KinematicCloudSC<CloudType>>&
 Foam::KinematicCloudSC<CloudType>::injectors() const
 {
     return injectors_;
@@ -181,7 +181,7 @@ Foam::KinematicCloudSC<CloudType>::injectors() const
 
 
 template<class CloudType>
-inline Foam::InjectionModelList<Foam::KinematicCloudSC<CloudType>>&
+inline Foam::InjectionModelSCList<Foam::KinematicCloudSC<CloudType>>&
 Foam::KinematicCloudSC<CloudType>::injectors()
 {
     return injectors_;

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --job-name=start
-#SBATCH --output=start.out
-#SBATCH --error=start.err
+#SBATCH --job-name=msh
+#SBATCH --output=mesh.out
+#SBATCH --error=mesh.err
 #SBATCH --time=6:00:00
 #SBATCH --partition=compute
 #SBATCH --nodes=4
@@ -23,7 +23,7 @@ source ~/OpenFOAM/OpenFOAM-7/etc/bashrc
 
 
 ## Prepare Script
-chmod +x Allstart
+chmod +x Allmesh
 
 ## Run
-./Allstart
+./Allmesh

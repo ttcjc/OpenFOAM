@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#SBATCH --job-name=mesh
-#SBATCH --output=mesh.out
-#SBATCH --error=mesh.err
+#SBATCH --job-name=rcn
+#SBATCH --output=reconstruct.out
+#SBATCH --error=reconstruct.err
 #SBATCH --time=6:00:00
 #SBATCH --partition=compute
-#SBATCH --nodes=4
-#SBATCH --ntasks-per-node=64
-#SBATCH --cpus-per-task=2
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=128
 #SBATCH --mem-per-cpu=3850
 #SBATCH --account=su005-garmory21c
 
@@ -21,9 +21,8 @@ module load Qt5/5.15.5
 module load OpenMPI/4.1.4
 source ~/OpenFOAM/OpenFOAM-7/etc/bashrc
 
-
 ## Prepare Script
-chmod +x Allmesh
+chmod +x AllreconstructLatest
 
 ## Run
-./Allmesh
+./Allreconstruct
